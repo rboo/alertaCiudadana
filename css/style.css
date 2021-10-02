@@ -626,7 +626,7 @@
   color: #137633;
 }
 
-.input-fill .input-label {
+.input-label {
   position: absolute;
   top: 0px;
   left: 28px;
@@ -665,5 +665,10 @@
 .btn-login:hover {
   cursor: pointer;
   background-color: #fff;
+  color: #137633;
+}
+.label-selecionada {
+  top: -16px;
+  margin-bottom: 3rem;
   color: #137633;
 }
