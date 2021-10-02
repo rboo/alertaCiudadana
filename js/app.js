@@ -108,4 +108,36 @@ if (password != null) {
   });
 }
 
+//configurando para que input password solo reciba números
+function valideKey(evt) {
+  // code es la representacion decimal de ASCII de la tecla presionada
+  let code = evt.which ? evt.which : evt.keyCode;
+
+  if (code == 8) {
+    // tecla borrar
+    return true;
+  } else if (code >= 48 && code <= 57) {
+    // es un número
+    return true;
+  } else {
+    // es cualquier otra tecla
+    return false;
+  }
+}
+
+if (password == focus()) {
+}
+
+//CODIGO PARA SOLO ACEPTAR NÚMEROS EN INPUT DNI
+dni.addEventListener('keypress', e => {
+  if (!soloNumeros(e)) {
+    e.preventDefault();
+  }
+});
+//Solo permite introducir numeros.
+function soloNumeros(e) {
+  var key = e.charCode;
+  return key >= 48 && key <= 57;
+}
+
 /* ************** FIN CODIGO DE LOGIN ********************** */
