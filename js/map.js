@@ -1,11 +1,15 @@
 var map;
 
+
 function initMap() {
-  loadIncidents();
+  
   map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: -9.08528, lng: -78.57833 },
     zoom: 12,
   });
+
+  loadIncidents();
+
 }
 
 // function addMarker() {

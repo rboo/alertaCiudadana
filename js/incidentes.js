@@ -52,15 +52,10 @@ function loadIncidentDetail(uid) {
           'data',
           dataIncidente.latitud + '-' + dataIncidente.longitud,
         );
-        showDetailIncident(dataIncidente);
-        /*document.getElementById("alerts__list").innerHTML = "";
-                snapshot.forEach(function (childSnapshot) {
-                    index++;
-                    var childData = childSnapshot.val();
-                    console.log("data", childData);
-                    showList(childData, index);
-                });*/
 
+        //showDetailIncident(dataIncidente);
+        getDataUser(dataIncidente.usuario,dataIncidente);
+       
         destinationLocation = new google.maps.LatLng(
           dataIncidente.latitud,
           dataIncidente.longitud,
@@ -106,21 +101,21 @@ function generateMarker({ position, title }) {
   });
 }
 
-function showDetailIncident(data){
-  let dataUser = getDataUser(data.usuario);
-  console.log("dataUser",dataUser);
+function showDetailIncident(dataIncidente,dataUsuario) {
+  //let dataUser = getDataUser(data.usuario);
+  //console.log("dataUser", JSON.stringify(dataUser));
   document.getElementById('alerts-details-incident').innerHTML = '';
   document.getElementById(
     'alerts-details-incident',
-  ).innerHTML =  
-`
+  ).innerHTML =
+    `
 <ul class="alerts-details__list">
   <li class="alerts-details__item">
     <span class="alerts-details__key alerts-details__title-key"
       >TITULO INCIDENTE:</span
     >
     <span class="alerts-details__valor alerts-details__title-valor"
-      >${data.titulo}</span
+      >${dataIncidente.titulo}</span
     >
   </li>
 
@@ -130,7 +125,7 @@ function showDetailIncident(data){
     >
     <span
       class="alerts-details__valor alerts-details__description-valor"
-      >${data.descripcion}</span
+      >${dataIncidente.descripcion}</span
     >
   </li>
 
@@ -139,7 +134,7 @@ function showDetailIncident(data){
       >FECHA:</span
     >
     <span class="alerts-details__valor alerts-details__date-valor"
-      >${data.fecha}
+      >${dataIncidente.fecha}
     </span>
   </li>
 
@@ -148,7 +143,7 @@ function showDetailIncident(data){
       >HORA:</span
     >
     <span class="alerts-details__valor alerts-details__hour-valor"
-      >${data.hora}</span
+      >${dataIncidente.hora}</span
     >
   </li>
 
@@ -157,7 +152,7 @@ function showDetailIncident(data){
       >NOMBRE:</span
     >
     <span class="alerts-details__valor alerts-details__name-valor"
-      >Jose Miguel</span
+      >${dataUsuario.nombres}</span
     >
   </li>
 
@@ -166,7 +161,7 @@ function showDetailIncident(data){
       >APELLIDO:</span
     >
     <span class="alerts-details__valor alerts-details__lastname-valor"
-      >Carranza López</span
+      >${dataUsuario.apellidos}</span
     >
   </li>
 
@@ -175,7 +170,7 @@ function showDetailIncident(data){
       >DNI:</span
     >
     <span class="alerts-details__valor alerts-details__dni-valor"
-      >45563021</span
+      >${dataUsuario.numerodocumento}</span
     >
   </li>
 
@@ -184,24 +179,21 @@ function showDetailIncident(data){
       >TELEFONO:</span
     >
     <span class="alerts-details__valor alerts-details__phone-valor"
-      >942356412</span
+      >${dataUsuario.telefono}</span
     >
   </li>
 </ul>`;
 }
 
-function getDataUser(uid){
-  console.log("data uid",uid);
+function getDataUser(uid,data) {
+  //console.log("data uid", uid);
   let user;
-  firebase
-    .auth()
-    .signInWithEmailAndPassword(user, key)
-    .then(userCredential => {
-      var starCountRef = dbref.ref().child('usuarios').child(uid);
-      starCountRef.on('value', snapshot => {
-        user = snapshot.val();
-        console.log("data user",user);
-      });
-    });
-    return user;
+
+  var starCountRef = firebase.database().ref('usuarios').child(uid);
+  starCountRef.on('value', (snapshot) => {
+    user = snapshot.val();
+    showDetailIncident(data,user);
+    //console.log("getDataUser", user);
+  });
+  //return user;
 }
