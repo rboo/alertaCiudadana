@@ -83,7 +83,7 @@ if (floatAlertHistory != null) {
 
 /* ******** CODIGO DE LOGIN ************************** */
 
-let dni = document.querySelector('#dni');
+/* let dni = document.querySelector('#dni');
 let password = document.querySelector('#password');
 
 if (dni != null) {
@@ -106,18 +106,20 @@ if (password != null) {
       labelPassword.classList.add('label-selecionada');
     }
   });
-}
+} */
 
 //CODIGO PARA SOLO ACEPTAR NÚMEROS EN INPUT DNI
-dni.addEventListener('keypress', e => {
-  if (!soloNumeros(e)) {
-    e.preventDefault();
+/* if (dni !== null) {
+  dni.addEventListener('keypress', e => {
+    if (!soloNumeros(e)) {
+      e.preventDefault();
+    }
+  });
+  //Solo permite introducir numeros.
+  function soloNumeros(e) {
+    var key = e.charCode;
+    return key >= 48 && key <= 57;
   }
-});
-//Solo permite introducir numeros.
-function soloNumeros(e) {
-  var key = e.charCode;
-  return key >= 48 && key <= 57;
 }
-
+ */
 /* ************** FIN CODIGO DE LOGIN ********************** */
