@@ -20,7 +20,9 @@
 }
 .sidebar.close {
   width: 78px;
+  opacity: 1;
 }
+
 .sidebar .logo-details {
   height: 60px;
   width: 100%;
@@ -285,15 +287,14 @@
 .main-content {
   margin-top: 1rem;
   transition: all 0.6s ease;
-  width: 90%;
+  /* width: 90%; */
   height: 80vh;
   /* margin: 1rem auto; */
-  margin-left: auto;
+  /* margin-left: auto; */
   padding-right: 2rem;
   z-index: 150;
-  max-width: 90%;
+  /* max-width: 90%; */
   display: flex;
-  /* background: grey; */
 }
 
 .alerts {
@@ -307,6 +308,8 @@
   max-height: 80vh;
   overflow-y: auto;
   position: relative;
+  /* probando */
+  margin-left: 100px;
 }
 
 .alerts::before,
@@ -418,10 +421,15 @@
 
 .alerts__list-link {
   /* display: flex; */
-  text-decoration: none;
   color: black;
   width: 100%;
+  text-decoration: none;
   display: block;
+}
+
+.alerts__list-link:hover {
+  text-decoration: none;
+  color: black;
 }
 
 .alerts__list-date {
@@ -467,7 +475,7 @@
 }
 
 .max-w80 {
-  max-width: 80%;
+  /* max-width: 80%; */
 }
 
 .home-content .icon-menu,
@@ -486,6 +494,7 @@
   padding-top: 1rem;
   transition: 0.9s all ease;
   position: relative;
+  margin-left: 100px;
 }
 
 .alerts-details__list {
@@ -672,3 +681,29 @@
   margin-bottom: 3rem;
   color: #137633;
 }
+.sidebar.close:hover {
+  opacity: 1;
+  background: #137633;
+}
+
+/* ******** INICIO ESTILOS CRUD USUARIOS ************ */
+.table-head tr th {
+  font-size: 0.8rem;
+  vertical-align: middle;
+  background: #137633;
+  color: white;
+}
+
+.bodyUsuarios td {
+  font-size: 0.8rem;
+}
+
+.modalUsuarios {
+  font-size: 0.9rem;
+}
+.tabla-usuarios {
+  margin-left: 15%;
+  margin-top: 4%;
+}
+
+/* ******** FIN ESTILOS CRUD USUARIOS ************ */

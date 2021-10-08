@@ -1,167 +1,20 @@
-/* ********** DECLARACION DE VARIABLES *************** */
-let sidebar = document.querySelector('.sidebar');
-let sidebarBtn = document.querySelector('.bx-menu');
-
-let alertHistory = document.querySelector('.alert-history');
-let alerts = document.querySelector('.alerts');
-let alertsDetails = document.querySelector('.alerts-details');
-let mainContent = document.querySelector('.main-content');
-let mapAlerts = document.querySelector('.map-alerts');
-let btnCrudUsuarios = document.querySelector('#btnCrudUsuarios');
-let tablaUsuarios = document.querySelector('.tabla-usuarios');
-/* ********** FIN DECLARACION DE VARIABLES ************* */
-
-// INICIO boton CRUD USUARIOS ************//
-
-if (btnCrudUsuarios !== null) {
-  btnCrudUsuarios.addEventListener('click', () => {
-    tablaUsuarios.classList.remove('d-none');
-    sidebar.classList.add('close');
-    alerts.classList.add('d-none');
-    alertsDetails.classList.add('d-none');
-    mapAlerts.classList.add('d-none');
-  });
-}
-
-/* ******* FIN BOTON CRUD USUARIOS ************ */
-
-let arrow = document.querySelectorAll('.arrow');
-for (var i = 0; i < arrow.length; i++) {
-  arrow[i].addEventListener('click', e => {
-    let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
-    arrowParent.classList.toggle('showMenu');
-  });
-}
-
-if (sidebar !== null || sidebarBtn !== null) {
-  // console.log(sidebarBtn);
-  sidebarBtn.addEventListener('click', () => {
-    sidebar.classList.toggle('close');
-    // mainContent.classList.toggle('max-w80');
-  });
-}
-
-if (alertHistory != null) {
-  alertHistory.addEventListener('click', () => {
-    // for (let i = 0; i < elements.length; i++) {
-    //   elements[i].addEventListener('click', e => {
-    //     console.log('hice click en un boton');
-    //     // let dataAttribute = element[i].getAttribute('data-id');
-    //     // console.log('data', dataAttribute);
-    //     // loadIncidentDetail(dataAttribute);
-    //   });
-    // }
-    // alerts.classList.toggle('d-none');
-    // alerts.classList.toggle('v-hidden');
-
-    //micodigo
-    alerts.classList.remove('d-none');
-    // alerts.classList.toggle('left-none');
-    alerts.classList.add('left-none');
-    sidebar.classList.toggle('close');
-    // mainContent.classList.toggle('max-w80');
-    alertsDetails.classList.add('d-none');
-    mapAlerts.classList.add('d-none');
-    tablaUsuarios.classList.add('d-none');
-  });
-}
-
-let floatAlertHistory = document.querySelector('.float-alert-history');
-
-if (floatAlertHistory != null) {
-  floatAlertHistory.addEventListener('click', () => {
-    // alerts.classList.toggle('left-none');
-    alertsDetails.classList.add('d-none');
-    alerts.classList.remove('d-none');
-    alerts.classList.add('left-none');
-    //micodigo
-    // addmarker();
-
-    // if (alerts.classList.contains('d-none')) {
-    //   alertDetails.classList.add('d-none');
-    //   //mapAlert.classList.add('d-none');
-    // }
-  });
-}
-
-// let alertElements = document.querySelectorAll('.alerts__list-link');
-// let alertDetails = document.querySelector('.alerts-details');
-// let mapAlert = document.querySelector('.map-alerts');
-// let id1 = document.getElementById('alert1');
-// // console.log(alertDetails);
-// for (let i = 0; i < alertElements.length; i++) {
-//   alertElements[i].addEventListener('click', e => {
-//     console.log('hice click en un elemento');
-//     if (alertDetails.classList.contains('d-none')) {
-//       alertDetails.classList.toggle('d-none');
-//       //mapAlert.classList.toggle('d-none');
-//     } else {
-//       console.log('ya se esta mostrando');
-//     }
-//   });
-// }
-
-/* ******** CODIGO DE LOGIN ************************** */
-
-/* let dni = document.querySelector('#dni');
-let password = document.querySelector('#password');
-
-if (dni != null) {
-  dni.addEventListener('blur', () => {
-    let labelDni = document.querySelector('.label-dni');
-    if (dni.value.length === 0) {
-      labelDni.classList.remove('label-selecionada');
-    } else {
-      labelDni.classList.add('label-selecionada');
-    }
-  });
-}
-
-if (password !== null) {
-  password.addEventListener('blur', () => {
-    let labelPassword = document.querySelector('.label-password');
-    if (password.value.length === 0) {
-      labelPassword.classList.remove('label-selecionada');
-    } else {
-      labelPassword.classList.add('label-selecionada');
-    }
-  });
-} */
-
-//CODIGO PARA SOLO ACEPTAR NÚMEROS EN INPUT DNI
-if (dni !== null) {
-  dni.addEventListener('keypress', e => {
-    if (!soloNumeros(e)) {
-      e.preventDefault();
-    }
-  });
-  //Solo permite introducir numeros.
-  function soloNumeros(e) {
-    var key = e.charCode;
-    return key >= 48 && key <= 57;
-  }
-}
-
-/* ************** FIN CODIGO DE LOGIN ********************** */
-
-/* ************ INICIO CODIGO TABLA CRUD USUARIOS **************** */
 $(document).ready(function () {
-  // // Your web app's Firebase configuration
-  // const config = {
-  //   // Your web app's Firebase configuration
-  //   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  //   apiKey: 'AIzaSyAIrdUu3y_qrLh7oQQai6mEqX0HfXzaLbc',
-  //   authDomain: 'alertaciudadana-50dd3.firebaseapp.com',
-  //   databaseURL: 'https://alertaciudadana-50dd3-default-rtdb.firebaseio.com',
-  //   projectId: 'alertaciudadana-50dd3',
-  //   storageBucket: 'alertaciudadana-50dd3.appspot.com',
-  //   messagingSenderId: '277260721203',
-  //   appId: '1:277260721203:web:f0b1b96d708699e855d746',
-  //   measurementId: 'G-PCWKNEMW0M',
-  // };
+  // Your web app's Firebase configuration
+  const config = {
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    apiKey: 'AIzaSyAIrdUu3y_qrLh7oQQai6mEqX0HfXzaLbc',
+    authDomain: 'alertaciudadana-50dd3.firebaseapp.com',
+    databaseURL: 'https://alertaciudadana-50dd3-default-rtdb.firebaseio.com',
+    projectId: 'alertaciudadana-50dd3',
+    storageBucket: 'alertaciudadana-50dd3.appspot.com',
+    messagingSenderId: '277260721203',
+    appId: '1:277260721203:web:f0b1b96d708699e855d746',
+    measurementId: 'G-PCWKNEMW0M',
+  };
 
   // Initialize Firebase
-  // firebase.initializeApp(config);
+  firebase.initializeApp(config);
 
   var filaEliminada; //para capturara la fila eliminada
   var filaEditada; //para capturara la fila editada o actualizada
@@ -351,4 +204,3 @@ $(document).ready(function () {
     });
   });
 });
-/* ************ FIN CODIGO CRUD USUARIOS ******************** */
