@@ -1,15 +1,11 @@
 var map;
 
-
 function initMap() {
-  
   map = new google.maps.Map(document.getElementById('map'), {
-    center: { lat: -9.08528, lng: -78.57833 },
+    center: { lat: 0, lng: 0 },
     zoom: 12,
   });
-
   loadIncidents();
-
 }
 
 // function addMarker() {
@@ -46,6 +42,7 @@ let addMarquer = () => {
   let elements = document.querySelectorAll('.alerts__list-link');
   let alertDetails = document.querySelector('.alerts-details');
   let alerts = document.querySelector('.alerts');
+  let mapAlerts = document.querySelector('.map-alerts');
 
   for (let i = 0; i < elements.length; i++) {
     elements[i].addEventListener('click', e => {
@@ -55,6 +52,7 @@ let addMarquer = () => {
       loadIncidentDetail(dataAttribute);
 
       alertDetails.classList.remove('d-none');
+      mapAlerts.classList.remove('d-none');
       // alerts.classList.remove('left-none');
       alerts.classList.add('d-none');
     });

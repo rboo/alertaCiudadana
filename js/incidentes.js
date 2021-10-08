@@ -1,5 +1,5 @@
 const dbref = firebase.database(); //.ref().child('incidentes');
-const user = 'rbalbis2001@gmail.com';
+const user = 'test@gmail.com';
 const key = '123456';
 
 function loadIncidents() {
@@ -54,8 +54,8 @@ function loadIncidentDetail(uid) {
         );
 
         //showDetailIncident(dataIncidente);
-        getDataUser(dataIncidente.usuario,dataIncidente);
-       
+        getDataUser(dataIncidente.usuario, dataIncidente);
+
         destinationLocation = new google.maps.LatLng(
           dataIncidente.latitud,
           dataIncidente.longitud,
@@ -101,14 +101,11 @@ function generateMarker({ position, title }) {
   });
 }
 
-function showDetailIncident(dataIncidente,dataUsuario) {
+function showDetailIncident(dataIncidente, dataUsuario) {
   //let dataUser = getDataUser(data.usuario);
   //console.log("dataUser", JSON.stringify(dataUser));
   document.getElementById('alerts-details-incident').innerHTML = '';
-  document.getElementById(
-    'alerts-details-incident',
-  ).innerHTML =
-    `
+  document.getElementById('alerts-details-incident').innerHTML = `
 <ul class="alerts-details__list">
   <li class="alerts-details__item">
     <span class="alerts-details__key alerts-details__title-key"
@@ -185,14 +182,14 @@ function showDetailIncident(dataIncidente,dataUsuario) {
 </ul>`;
 }
 
-function getDataUser(uid,data) {
+function getDataUser(uid, data) {
   //console.log("data uid", uid);
   let user;
 
   var starCountRef = firebase.database().ref('usuarios').child(uid);
-  starCountRef.on('value', (snapshot) => {
+  starCountRef.on('value', snapshot => {
     user = snapshot.val();
-    showDetailIncident(data,user);
+    showDetailIncident(data, user);
     //console.log("getDataUser", user);
   });
   //return user;
