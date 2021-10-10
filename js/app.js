@@ -9,7 +9,31 @@ let mainContent = document.querySelector('.main-content');
 let mapAlerts = document.querySelector('.map-alerts');
 let btnCrudUsuarios = document.querySelector('#btnCrudUsuarios');
 let tablaUsuarios = document.querySelector('.tabla-usuarios');
+let btnLogin = document.querySelector('#btnLogin');
 /* ********** FIN DECLARACION DE VARIABLES ************* */
+
+let localStorage = window.localStorage;
+
+/** INICIO BOTON LOGIN **/
+if (btnLogin !== null) {
+  btnLogin.addEventListener('click', () => {
+    let email = $.trim($('#dni').val());
+    let password = $.trim($('#password').val());
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        console.log("correcto");
+        var user = userCredential.user;
+        localStorage.setItem("usuario", JSON.stringify(user));
+        window.location.href = "index.html";
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        alert(`Error ${errorCode} - ${errorMessage}`)
+      });
+  });
+}
+/** FIN BOTON LOGIN **/
 
 // INICIO boton CRUD USUARIOS ************//
 
@@ -129,7 +153,7 @@ if (password !== null) {
 } */
 
 //CODIGO PARA SOLO ACEPTAR NÚMEROS EN INPUT DNI
-if (dni !== null) {
+/*if (dni !== null) {
   dni.addEventListener('keypress', e => {
     if (!soloNumeros(e)) {
       e.preventDefault();
@@ -140,12 +164,12 @@ if (dni !== null) {
     var key = e.charCode;
     return key >= 48 && key <= 57;
   }
-}
+}*/
 
 /* ************** FIN CODIGO DE LOGIN ********************** */
 
 /* ************ INICIO CODIGO TABLA CRUD USUARIOS **************** */
-$(document).ready(function () {
+/*$(document).ready(function () {
   // // Your web app's Firebase configuration
   // const config = {
   //   // Your web app's Firebase configuration
@@ -350,5 +374,5 @@ $(document).ready(function () {
       }
     });
   });
-});
+});*/
 /* ************ FIN CODIGO CRUD USUARIOS ******************** */

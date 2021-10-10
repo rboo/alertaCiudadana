@@ -1,6 +1,6 @@
 $(document).ready(function () {
   // Your web app's Firebase configuration
-  const config = {
+  /*const config = {
     // Your web app's Firebase configuration
     // For Firebase JS SDK v7.20.0 and later, measurementId is optional
     apiKey: 'AIzaSyAIrdUu3y_qrLh7oQQai6mEqX0HfXzaLbc',
@@ -14,7 +14,7 @@ $(document).ready(function () {
   };
 
   // Initialize Firebase
-  firebase.initializeApp(config);
+  firebase.initializeApp(config);*/
 
   var filaEliminada; //para capturara la fila eliminada
   var filaEditada; //para capturara la fila editada o actualizada
@@ -114,6 +114,7 @@ $(document).ready(function () {
     let imagen = '';
     let sexo = $.trim($('#sexo').val());
     let tipoAcceso = '';
+    let host = '1'; //1 -> web
 
     let idFirebase = id;
     if (idFirebase == '') {
@@ -132,10 +133,12 @@ $(document).ready(function () {
       imagen: imagen,
       sexo: sexo,
       tipoacceso: tipoAcceso,
+      host: host
     };
 
     actualizacionData = {};
     actualizacionData[`/${idFirebase}`] = data;
+    createUser(email,password)
     coleccionUsuarios.update(actualizacionData);
     id = '';
     $('form').trigger('reset'); //limpiamos los campos del formulario
@@ -204,3 +207,17 @@ $(document).ready(function () {
     });
   });
 });
+
+function createUser(email, password) {
+  firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      // Signed in
+      var user = userCredential.user;
+      console.info(`Usuario creado correctamente ${user}`)
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      alert(`Error ${errorCode} - ${errorMessage}`)
+    });
+}
