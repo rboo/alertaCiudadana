@@ -702,8 +702,17 @@
   font-size: 0.9rem;
 }
 .tabla-usuarios {
-  margin-left: 15%;
-  margin-top: 4%;
+  margin-left: 7em;
+  margin-top: 0;
 }
 
+.container #btnNuevo {
+  margin-bottom: 0.5em;
+  vertical-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 170px;
+  font-size: 0.9em;
+}
 /* ******** FIN ESTILOS CRUD USUARIOS ************ */

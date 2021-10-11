@@ -31,6 +31,65 @@ $(document).ready(function () {
   var dataSet = []; //array para guardar los valores de los campos inputs del form
 
   var table = $('#tablaUsuarios').DataTable({
+    /* ***************************** INICIO CONFIGURACION BOTON EXCEL****************************************** */
+    dom: 'Bfrtip',
+    buttons: {
+      dom: {
+        button: {
+          className: 'btn',
+        },
+      },
+      buttons: [
+        {
+          //definimos estilos del boton de excel
+          extend: 'excelHtml5',
+          text: 'Reporte Excel',
+          className: 'btn btn-outline-success',
+
+          //defino que columnas quiero que se vean
+          exportOptions: {
+            columns: [1, 2, 3, 4, 5, 6, 7, 8],
+          },
+
+          //definimos los parametros al exportar a excel
+
+          excelStyles: {
+            template: ['blue_medium', 'header_green', 'title_medium'],
+          },
+
+          // ejemplo para IMPRIMIR
+
+          pageStyle: {
+            sheetPr: {
+              pageSetUpPr: {
+                fitToPage: 1, // Fit the printing to the page
+              },
+            },
+            printOptions: {
+              horizontalCentered: true,
+              verticalCentered: true,
+            },
+            pageSetup: {
+              orientation: 'landscape', // Orientacion
+              paperSize: '9', // Tamaño del papel (1 = Legal, 9 = A4)
+              fitToWidth: '1', // Ajustar al ancho de la página
+              fitToHeight: '0', // Ajustar al alto de la página
+            },
+            pageMargins: {
+              left: '0.2',
+              right: '0.2',
+              top: '0.4',
+              bottom: '0.4',
+              header: '0',
+              footer: '0',
+            },
+            repeatHeading: true, // Repeat the heading row at the top of each page
+            repeatCol: 'A:A', // Repeat column A (for pages wider than a single printed page)
+          },
+        },
+      ],
+    },
+    /* ***************************** FIN CONFIGURACION BOTON EXCEL ****************************************** */
     pageLength: 5,
     lengthMenu: [
       [5, 10, 20, -1],
@@ -133,12 +192,12 @@ $(document).ready(function () {
       imagen: imagen,
       sexo: sexo,
       tipoacceso: tipoAcceso,
-      host: host
+      host: host,
     };
 
     actualizacionData = {};
     actualizacionData[`/${idFirebase}`] = data;
-    createUser(email,password)
+    createUser(email, password);
     coleccionUsuarios.update(actualizacionData);
     id = '';
     $('form').trigger('reset'); //limpiamos los campos del formulario
@@ -209,15 +268,17 @@ $(document).ready(function () {
 });
 
 function createUser(email, password) {
-  firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then((userCredential) => {
+  firebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then(userCredential => {
       // Signed in
       var user = userCredential.user;
-      console.info(`Usuario creado correctamente ${user}`)
+      console.info(`Usuario creado correctamente ${user}`);
     })
-    .catch((error) => {
+    .catch(error => {
       var errorCode = error.code;
       var errorMessage = error.message;
-      alert(`Error ${errorCode} - ${errorMessage}`)
+      alert(`Error ${errorCode} - ${errorMessage}`);
     });
 }
