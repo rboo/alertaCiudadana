@@ -7,6 +7,7 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+
 .sidebar {
   position: fixed;
   top: 0;
@@ -197,9 +198,18 @@
   background: #043614;
   transition: all 0.5s ease;
 }
+
+.sidebar .profile-details name-job {
+  overflow: hidden;
+}
 .sidebar.close .profile-details img {
   padding: 10px;
 }
+
+#log-out {
+  /* width: fit-content; */
+}
+
 .sidebar .profile-details .profile_name,
 .sidebar .profile-details .job {
   color: #fff;
@@ -213,7 +223,8 @@
   display: none;
 }
 .sidebar .profile-details .job {
-  font-size: 12px;
+  /* font-size: 12px; */
+  font-size: 11px;
 }
 .home-section {
   /* background-color: #137633; */
@@ -682,8 +693,16 @@
   color: #137633;
 }
 .sidebar.close:hover {
-  opacity: 1;
+  opacity: 1 !important;
   background: #137633;
+}
+
+.close {
+  text-shadow: none;
+}
+
+.link_name {
+  font-weight: 400;
 }
 
 /* ******** INICIO ESTILOS CRUD USUARIOS ************ */
@@ -692,10 +711,13 @@
   vertical-align: middle;
   background: #137633;
   color: white;
+  min-width: 80px;
 }
 
 .bodyUsuarios td {
   font-size: 0.8rem;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .modalUsuarios {
@@ -715,4 +737,25 @@
   width: 170px;
   font-size: 0.9em;
 }
+
+.buttons-excel span {
+  font-size: 0.9em;
+}
+
+.dataTables_filter label {
+  font-size: 0.9em;
+}
+
+#tablaUsuarios_filter input {
+  width: 100%;
+}
+
+#tablaUsuarios_wrapper .dataTables_info {
+  font-size: 0.8em;
+}
+
+#tablaUsuarios_paginate .pagination {
+  font-size: 0.9em;
+}
+
 /* ******** FIN ESTILOS CRUD USUARIOS ************ */

@@ -12,6 +12,51 @@ let tablaUsuarios = document.querySelector('.tabla-usuarios');
 let btnLogin = document.querySelector('#btnLogin');
 /* ********** FIN DECLARACION DE VARIABLES ************* */
 
+/* inicio probando codigo */
+// alertHistory.addEventListener('click', () => {
+//   let cant = $('.alerts__list li').length;
+//   console.log(cant);
+// });
+
+/* let contarLista = () => {
+  setTimeout(() => {
+    let cant = $('.alerts__list li').length;
+    console.log(cant);
+  }, 10000);
+}; */
+
+/* probando este codigo */
+// let cant = 0;
+// const observer = new MutationObserver(mutationList => {
+//   mutationList.forEach(mutation => {
+//     // setTimeout(() => {
+//     if (mutation.addedNodes.length) {
+//       console.log('Añadido', mutation.addedNodes[0]);
+//     }
+//     // }, 10000);
+//     //si hay algo eliminado
+//     /* if (mutation.removedNodes.length) {
+//       console.log('eliminado', mutation.removedNodes[0]);
+//     } */
+//   });
+//   console.log(mutationList.length);
+//   cant = mutationList.length;
+//   if (mutationList.length++) {
+//     console.log('se cambio la cantidad');
+//   }
+// });
+// console.log(observer);
+
+// // Indicar el target que deseamos escuchar u observar
+// const observerOptions = {
+//   // attributes: true,
+//   childList: true,
+//   // subtree: false,
+// };
+// let alertsList = document.querySelector('.alerts__list');
+// observer.observe(alertsList, observerOptions);
+/* fin probando codigo */
+
 let localStorage = window.localStorage;
 
 /** INICIO BOTON LOGIN **/
@@ -19,17 +64,19 @@ if (btnLogin !== null) {
   btnLogin.addEventListener('click', () => {
     let email = $.trim($('#dni').val());
     let password = $.trim($('#password').val());
-    firebase.auth().signInWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        console.log("correcto");
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(userCredential => {
+        console.log('correcto');
         var user = userCredential.user;
-        localStorage.setItem("usuario", JSON.stringify(user));
-        window.location.href = "index.html";
+        localStorage.setItem('usuario', JSON.stringify(user));
+        window.location.href = 'index.html';
       })
-      .catch((error) => {
+      .catch(error => {
         var errorCode = error.code;
         var errorMessage = error.message;
-        alert(`Error ${errorCode} - ${errorMessage}`)
+        alert(`Error ${errorCode} - ${errorMessage}`);
       });
   });
 }
@@ -107,6 +154,11 @@ if (floatAlertHistory != null) {
     // }
   });
 }
+
+// let botonRecargar = document.getElementById('boton-recargar');
+// botonRecargar.addEventListener('click', () => {
+//   location.reload();
+// });
 
 // let alertElements = document.querySelectorAll('.alerts__list-link');
 // let alertDetails = document.querySelector('.alerts-details');
