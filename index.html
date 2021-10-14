@@ -24,17 +24,17 @@
       crossorigin="anonymous"
     />
 
-    <!-- incio probando -->
+    <!-- button de dataTables -->
     <link
       rel="stylesheet"
       href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css"
     />
-    <!-- fin probando -->
+
     <!-- mis estilos -->
     <link rel="stylesheet" href="./css/normalize.css" />
     <link rel="stylesheet" href="./css/style.css" />
   </head>
-  <body>
+  <body id="main-body">
     <div class="main-container">
       <div class="sidebar close">
         <div class="logo-details">
@@ -141,10 +141,12 @@
           <li>
             <a href="#">
               <i class="bx bx-cog"></i>
-              <span class="link_name">Configuración</span>
+              <span class="link_name btnGraficas" id="btnGraficas"
+                >Gráficas</span
+              >
             </a>
             <ul class="sub-menu blank">
-              <li><a class="link_name" href="#">Configuración</a></li>
+              <li><a class="link_name" href="#">Gráficas</a></li>
             </ul>
           </li>
           <li>
@@ -175,6 +177,63 @@
         </div>
       </section>
       <section class="main-content">
+        <!-- ----- INICIO Modal 2 --------------->
+        <!-- Button trigger modal 2 -->
+        <div class="container-modal2">
+          <!-- <button
+            type="button"
+            class="btn btn-primary btn-activar-modal"
+            data-toggle="modal"
+            data-target="#staticBackdrop"
+          >
+            Launch static backdrop modal
+          </button> -->
+
+          <!-- cuerpo Modal 2-->
+          <div
+            class="modal fade"
+            id="staticBackdrop"
+            data-backdrop="static"
+            data-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">
+                    ¡ ATENCIÓN HAY UN NUEVO INCIDENTE !
+                  </h5>
+                  <button
+                    type="button"
+                    class="close btn-close-modal"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  UN USUARIO ACABA DE MANDAR UNA ALERTA A LA CENTRAL DE
+                  MONITORIO, POR FAVOR DIRIJASE A LA OPCIÓN HISTORIAL DE
+                  ALERTAS, GRACIAS.
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary btn-close-modal"
+                    data-dismiss="modal"
+                  >
+                    Cerrar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Fin Modal -->
+        </div>
+
         <div class="alerts">
           <!-- <div class="alerts d-none"> -->
           <ul class="alerts__list" id="alerts__list">
@@ -302,6 +361,11 @@
         <div class="map-alerts d-none" id="map">
           <!--<img src="./image/googlemap.jpg" alt="" class="map-alerts__image" />-->
         </div>
+
+        <!-- --------- INICIO GRAFICAS ------------ -->
+        <div class="graficasContainer d-none"></div>
+        <canvas id="myChart" class="d-none"></canvas>
+        <!-- --------- FIN GRAFICAS ------------ -->
 
         <!-- ---------------- TABLA USUARIOS ----------------- -->
         <div class="tabla-usuarios d-none">
@@ -467,6 +531,7 @@
                     </div>
                   </div>
                 </div>
+                <!-- Fin Modal -->
                 <!-- diseño de la tabla -->
                 <!-- <table id="tablaProductos" class="table table-bordered"> -->
                 <table
@@ -539,6 +604,8 @@
     <script src="https://cdn.jsdelivr.net/npm/datatables-buttons-excel-styles@1.1.1/js/buttons.html5.styles.templates.min.js"></script>
     <!-- fin probando codigo -->
 
+    <!-- cdn de graficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Mis scripts -->
     <script src="./js/FireBaseConfig.js"></script>
     <script src="./js/util.js"></script>

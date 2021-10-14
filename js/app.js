@@ -10,6 +10,9 @@ let mapAlerts = document.querySelector('.map-alerts');
 let btnCrudUsuarios = document.querySelector('#btnCrudUsuarios');
 let tablaUsuarios = document.querySelector('.tabla-usuarios');
 let btnLogin = document.querySelector('#btnLogin');
+let btnGraficas = document.getElementById('btnGraficas');
+let graficasContainer = document.querySelector('.graficasContainer');
+
 /* ********** FIN DECLARACION DE VARIABLES ************* */
 
 /* inicio probando codigo */
@@ -96,6 +99,55 @@ if (btnCrudUsuarios !== null) {
 
 /* ******* FIN BOTON CRUD USUARIOS ************ */
 
+/* ************** INICIO BOTON GRAFICAS ***************** */
+if (btnGraficas !== null) {
+  btnGraficas.addEventListener('click', () => {
+    graficasContainer.classList.remove('d-none');
+    sidebar.classList.add('close');
+  });
+}
+Chart.defaults.font.size = 20;
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    datasets: [
+      {
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+        ],
+        // fontSize: 40,
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+        ],
+        borderWidth: 1,
+      },
+    ],
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  },
+});
+
+/* ************** FIN BOTON GRAFICAS ***************** */
+
 let arrow = document.querySelectorAll('.arrow');
 for (var i = 0; i < arrow.length; i++) {
   arrow[i].addEventListener('click', e => {
@@ -114,18 +166,6 @@ if (sidebar !== null || sidebarBtn !== null) {
 
 if (alertHistory != null) {
   alertHistory.addEventListener('click', () => {
-    // for (let i = 0; i < elements.length; i++) {
-    //   elements[i].addEventListener('click', e => {
-    //     console.log('hice click en un boton');
-    //     // let dataAttribute = element[i].getAttribute('data-id');
-    //     // console.log('data', dataAttribute);
-    //     // loadIncidentDetail(dataAttribute);
-    //   });
-    // }
-    // alerts.classList.toggle('d-none');
-    // alerts.classList.toggle('v-hidden');
-
-    //micodigo
     alerts.classList.remove('d-none');
     // alerts.classList.toggle('left-none');
     alerts.classList.add('left-none');
@@ -134,24 +174,6 @@ if (alertHistory != null) {
     alertsDetails.classList.add('d-none');
     mapAlerts.classList.add('d-none');
     tablaUsuarios.classList.add('d-none');
-  });
-}
-
-let floatAlertHistory = document.querySelector('.float-alert-history');
-
-if (floatAlertHistory != null) {
-  floatAlertHistory.addEventListener('click', () => {
-    // alerts.classList.toggle('left-none');
-    alertsDetails.classList.add('d-none');
-    alerts.classList.remove('d-none');
-    alerts.classList.add('left-none');
-    //micodigo
-    // addmarker();
-
-    // if (alerts.classList.contains('d-none')) {
-    //   alertDetails.classList.add('d-none');
-    //   //mapAlert.classList.add('d-none');
-    // }
   });
 }
 
@@ -428,3 +450,5 @@ if (password !== null) {
   });
 });*/
 /* ************ FIN CODIGO CRUD USUARIOS ******************** */
+
+/* probando codigo */

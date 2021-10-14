@@ -2,14 +2,36 @@ const dbref = firebase.database(); //.ref().child('incidentes');
 const user = 'test@gmail.com';
 const key = '123456';
 
+let contActual = 0;
+let cont = 0;
+let cont2 = 0;
+let modalNuevoIncidente = document.getElementById('staticBackdrop');
+let btnNuevoIncidente = document.getElementById('btnNuevoIncidente');
+let btnActivarModal = document.querySelector('.btn-activar-modal');
+let mainBody = document.getElementById('main-body');
+let btnCloseModal = document.querySelectorAll('.btn-close-modal');
+let containerModal2 = document.querySelector('.container-modal2');
+console.log(btnCloseModal);
+
 function loadIncidents() {
+  console.log(alerts);
   let index = 0;
+  let ind = 0;
   firebase
     .auth()
     .signInWithEmailAndPassword(user, key)
+    .then(() => {
+      var starCountRef = dbref.ref().child('incidentes');
+      starCountRef.on('value', snapshot => {
+        snapshot.forEach(function (childSnapshot) {
+          cont2++; //contador de incidencias
+        });
+        console.log('segundo contador: ' + cont2);
+      });
+    })
     .then(userCredential => {
       // Signed in
-      var user = userCredential.user;
+      // var user = userCredential.user;
       // ...
       var starCountRef = dbref.ref().child('incidentes');
       starCountRef.on('value', snapshot => {
@@ -18,8 +40,21 @@ function loadIncidents() {
           index++;
           var childData = childSnapshot.val();
           console.log('data', childData);
+          // console.log(arreglo.sort);
           showList(childData, index);
+          cont++; //contador de incidencias
         });
+        console.log(`El contador actual es de: ${cont}`);
+        contActual = cont;
+
+        if (cont2 !== cont) {
+          mainBody.classList.add('modal-open');
+          modalNuevoIncidente.classList.add('show');
+          modalNuevoIncidente.style.display = 'block';
+        }
+        // console.log(`El contador actual es de: ${contActual}`);
+
+        cont = 0; //volver el contador de incidencias a 0 para volver a contar con la actuailzacion
       });
     })
     .catch(error => {
@@ -28,6 +63,17 @@ function loadIncidents() {
       console.error('error ' + errorCode + ' ' + errorMessage);
     });
 }
+
+//Configuracion de boton CERRAR de modal aviso nuevo incidente
+btnCloseModal.forEach(el => {
+  el.addEventListener('click', () => {
+    modalNuevoIncidente.classList.remove('show');
+    mainBody.classList.remove('modal-open');
+    containerModal2.style.display = 'hide';
+    document.location.reload();
+  });
+});
+//FIN Configuracion de boton CERRAR de modal aviso nuevo incidente
 
 function showList(data, index) {
   document.getElementById(

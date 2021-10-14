@@ -759,3 +759,61 @@
 }
 
 /* ******** FIN ESTILOS CRUD USUARIOS ************ */
+
+/* inicio graficas */
+.graficasContainer {
+  background-color: red;
+  position: absolute;
+  left: 100px;
+  display: none;
+}
+.main-container .main-content #myChart {
+  position: absolute;
+  left: 100px;
+  /* width: 900px !important; */
+  /* height: 500px !important; */
+  /* aspect-ratio: inherit !important; */
+  font-size: 2rem;
+}
+
+canvas {
+  /* background-color: red; */
+  /* height: auto; */
+  height: 80% !important;
+
+  width: 80vw !important;
+}
+
+canvas data {
+  font-size: 2rem;
+}
+
+/* ****************** INICIO ESTILOS MODAL NUEVO INCIDENTE ******** */
+
+.modal-header {
+  background-color: tomato;
+  color: white;
+}
+
+.modal-content {
+  height: 22rem;
+  width: 43rem;
+}
+
+.modal-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.container-modal2 .modal {
+  display: none;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* ****************** FIN ESTILOS MODAL NUEVO INCIDENTE ******** */
