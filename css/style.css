@@ -795,13 +795,22 @@ canvas data {
   color: white;
 }
 
-.modal-content {
-  height: 22rem;
-  width: 43rem;
+.modal-header h5 {
+  font-weight: 300;
 }
 
-.modal-body {
+.container-modal2 .modal-content {
+  /* height: 22rem; */
+  width: 43rem;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.container-modal2 .modal-body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -809,11 +818,26 @@ canvas data {
   font-size: 1.5rem;
 }
 
+.container-modal2 .modal-body__content {
+  font-weight: 300;
+}
+
 .container-modal2 .modal {
   display: none;
   justify-content: flex-end;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.6);
+}
+
+.bx-user-voice {
+  margin-bottom: 2rem;
+}
+
+.bx-user-voice::before {
+  content: '\ebc5';
+  font-size: 5rem;
+  /* font-weight: lighter; */
+  color: tomato;
 }
 
 /* ****************** FIN ESTILOS MODAL NUEVO INCIDENTE ******** */

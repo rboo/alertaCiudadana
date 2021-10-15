@@ -67,9 +67,9 @@ function loadIncidents() {
 //Configuracion de boton CERRAR de modal aviso nuevo incidente
 btnCloseModal.forEach(el => {
   el.addEventListener('click', () => {
-    modalNuevoIncidente.classList.remove('show');
-    mainBody.classList.remove('modal-open');
-    containerModal2.style.display = 'hide';
+    // modalNuevoIncidente.classList.remove('show');
+    // mainBody.classList.remove('modal-open');
+    // containerModal2.style.display = 'hide';
     document.location.reload();
   });
 });
