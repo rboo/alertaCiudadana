@@ -75,13 +75,31 @@ btnCloseModal.forEach(el => {
 });
 //FIN Configuracion de boton CERRAR de modal aviso nuevo incidente
 
+// Funcion para convertir el tiempo de 24 a 12 horas
+let tConvert = time => {
+  // Check correct time format and split into components
+  time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [
+    time,
+  ];
+
+  if (time.length > 1) {
+    // If time format correct
+    time = time.slice(1); // Remove full string match value
+    time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
+    time[0] = +time[0] % 12 || 12; // Adjust hours
+  }
+  return time.join(''); // return adjusted time or original string
+};
+// FIN Funcion para convertir el tiempo de 24 a 12 horas
+
 function showList(data, index) {
+  let hour = tConvert(data.hora);
   document.getElementById(
     'alerts__list',
   ).innerHTML += `<li class="alerts__list-items">
         <a class="alerts__list-link" href="#" id="alert${index}" data-id="${data.uid}">
             <span class="alerts__list-date">${data.fecha}</span>
-            <span class="alerts__list-hour">${data.hora}</span>
+            <span class="alerts__list-hour">${hour}</span>
         </a>
     </li>`;
 }

@@ -11,7 +11,8 @@ let btnCrudUsuarios = document.querySelector('#btnCrudUsuarios');
 let tablaUsuarios = document.querySelector('.tabla-usuarios');
 let btnLogin = document.querySelector('#btnLogin');
 let btnGraficas = document.getElementById('btnGraficas');
-let graficasContainer = document.querySelector('.graficasContainer');
+let graficasContainer = document.querySelector('.graficasContainer'); //no se esta utilizando por ahora
+let graficaIncidencias = document.querySelector('.graficaIncidencias');
 
 /* ********** FIN DECLARACION DE VARIABLES ************* */
 
@@ -104,6 +105,11 @@ if (btnGraficas !== null) {
   btnGraficas.addEventListener('click', () => {
     graficasContainer.classList.remove('d-none');
     sidebar.classList.add('close');
+    alerts.classList.add('d-none');
+    alertsDetails.classList.add('d-none');
+    mapAlerts.classList.add('d-none');
+    graficaIncidencias.classList.remove('d-none');
+    console.log('hice click en graficas');
   });
 }
 Chart.defaults.font.size = 20;
@@ -111,11 +117,11 @@ var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    labels: ['Enero', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
     datasets: [
       {
         label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
+        data: [10, 19, 3, 5, 2, 3],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',

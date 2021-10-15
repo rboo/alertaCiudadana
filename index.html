@@ -24,6 +24,12 @@
       crossorigin="anonymous"
     />
 
+    <!-- animate.js -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+
     <!-- button de dataTables -->
     <link
       rel="stylesheet"
@@ -177,7 +183,7 @@
         </div>
       </section>
       <section class="main-content">
-        <!-- ----- INICIO Modal 2 --------------->
+        <!-- ------------------------------ INICIO Modal 2 --------------->
         <!-- Button trigger modal 2 -->
         <div class="container-modal2">
           <!-- cuerpo Modal 2-->
@@ -225,7 +231,7 @@
               </div>
             </div>
           </div>
-          <!-- Fin Modal -->
+          <!-- ------------------------Fin Modal 2 ------------------->
         </div>
 
         <div class="alerts">
@@ -274,6 +280,7 @@
         </li>-->
           </ul>
         </div>
+        <!-- -------------------- inicio detalles de alertas-------- -->
         <div class="alerts-details d-none" id="alerts-details-incident">
           <!-- <div class="alerts-details"> -->
           <!--<ul class="alerts-details__list">
@@ -352,13 +359,18 @@
           </li>
         </ul>-->
         </div>
+        <!-- -------------------- Fin detalles de alertas-------- -->
+
+        <!-- ---------------- Inicio mapa --------------------------- -->
         <div class="map-alerts d-none" id="map">
           <!--<img src="./image/googlemap.jpg" alt="" class="map-alerts__image" />-->
         </div>
+        <!-- ---------------- Fin mapa --------------------------- -->
 
         <!-- --------- INICIO GRAFICAS ------------ -->
         <div class="graficasContainer d-none"></div>
-        <canvas id="myChart" class="d-none"></canvas>
+        <canvas id="myChart" class="graficaIncidencias d-none"></canvas>
+
         <!-- --------- FIN GRAFICAS ------------ -->
 
         <!-- ---------------- TABLA USUARIOS ----------------- -->
