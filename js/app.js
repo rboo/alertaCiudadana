@@ -8,7 +8,9 @@ let alertsDetails = document.querySelector('.alerts-details');
 let mainContent = document.querySelector('.main-content');
 let mapAlerts = document.querySelector('.map-alerts');
 let btnCrudUsuarios = document.querySelector('#btnCrudUsuarios');
+let btnCrudIncidencias = document.querySelector('#btnCrudIncidencias');
 let tablaUsuarios = document.querySelector('.tabla-usuarios');
+let tablaIncidencias = document.querySelector('.tabla-incidencias');
 let btnLogin = document.querySelector('#btnLogin');
 let btnGraficas = document.getElementById('btnGraficas');
 let graficasContainer = document.querySelector('.graficasContainer'); //no se esta utilizando por ahora
@@ -95,10 +97,26 @@ if (btnCrudUsuarios !== null) {
     alerts.classList.add('d-none');
     alertsDetails.classList.add('d-none');
     mapAlerts.classList.add('d-none');
+    tablaIncidencias.classList.add('d-none');
   });
 }
 
 /* ******* FIN BOTON CRUD USUARIOS ************ */
+
+// INICIO boton CRUD INCIDENCIAS ************//
+
+if (btnCrudIncidencias !== null) {
+  btnCrudIncidencias.addEventListener('click', () => {
+    tablaIncidencias.classList.remove('d-none');
+    sidebar.classList.add('close');
+    alerts.classList.add('d-none');
+    alertsDetails.classList.add('d-none');
+    mapAlerts.classList.add('d-none');
+    tablaUsuarios.classList.add('d-none');
+  });
+}
+
+/* ******* FIN BOTON CRUD INCIDENCIAS ************ */
 
 /* ************** INICIO BOTON GRAFICAS ***************** */
 if (btnGraficas !== null) {
@@ -170,6 +188,7 @@ if (sidebar !== null || sidebarBtn !== null) {
   });
 }
 
+/************  incio BOTON HISTORIAL ALERTAS **********************/
 if (alertHistory != null) {
   alertHistory.addEventListener('click', () => {
     alerts.classList.remove('d-none');
@@ -180,9 +199,11 @@ if (alertHistory != null) {
     alertsDetails.classList.add('d-none');
     mapAlerts.classList.add('d-none');
     tablaUsuarios.classList.add('d-none');
+    tablaIncidencias.classList.add('d-none');
   });
 }
 
+/**************** FIN BOTON HISTORIAL ALERTAS **********************/
 // let botonRecargar = document.getElementById('boton-recargar');
 // botonRecargar.addEventListener('click', () => {
 //   location.reload();

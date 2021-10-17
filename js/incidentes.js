@@ -5,6 +5,7 @@ const key = '123456';
 let contActual = 0;
 let cont = 0;
 let cont2 = 0;
+let primercont = [];
 let modalNuevoIncidente = document.getElementById('staticBackdrop');
 let btnNuevoIncidente = document.getElementById('btnNuevoIncidente');
 let btnActivarModal = document.querySelector('.btn-activar-modal');
@@ -33,6 +34,7 @@ function loadIncidents() {
       // Signed in
       // var user = userCredential.user;
       // ...
+
       var starCountRef = dbref.ref().child('incidentes');
       starCountRef.on('value', snapshot => {
         document.getElementById('alerts__list').innerHTML = '';
@@ -43,20 +45,69 @@ function loadIncidents() {
           // console.log(arreglo.sort);
           showList(childData, index);
           cont++; //contador de incidencias
+          // primercont[index] = cont;
         });
         console.log(`El contador actual es de: ${cont}`);
         contActual = cont;
+
+        /* probando codigo */
+        // x = {
+        //   aInternal: contActual,
+        //   aListener: function (val) {},
+        //   set a(val) {
+        //     this.aInternal = val;
+        //     this.aListener(val);
+        //   },
+        //   get a() {
+        //     return this.aInternal;
+        //   },
+        //   registerListener: function (listener) {
+        //     this.aListener = listener;
+        //   },
+        // };
+
+        // x.registerListener(function (val) {
+        //   alert('Someone changed the value of x.a to ' + val);
+        // });
+
+        // x.a = contActual;
+        // console.log(object);
+
+        /* fin probando codigo */
+
+        // console.log(childData.get.count());
+        // primercont.forEach(el => {
+        //   console.log(el);
+        // });
 
         if (cont2 !== cont) {
           mainBody.classList.add('modal-open');
           modalNuevoIncidente.classList.add('show');
           modalNuevoIncidente.style.display = 'block';
         }
+
+        // if (cont2 - cont > cont) {
+        //   console.log('se elimino un elemento de incidencias');
+        //   // break;
+        // }
+
         // console.log(`El contador actual es de: ${contActual}`);
+        // console.log(`este es el array contador ${primercont[0]}`);
+        // if (cont2 !== cont) {
 
         cont = 0; //volver el contador de incidencias a 0 para volver a contar con la actuailzacion
       });
     })
+
+    // .then(() => {
+    //   if (change.after.exists()) {
+    //     console.log(cont2);
+    //     console.log(cont);
+    //     mainBody.classList.add('modal-open');
+    //     modalNuevoIncidente.classList.add('show');
+    //     modalNuevoIncidente.style.display = 'block';
+    //   }
+    // })
     .catch(error => {
       var errorCode = error.code;
       var errorMessage = error.message;

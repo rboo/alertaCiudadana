@@ -31,9 +31,55 @@ $(document).ready(function () {
   var dataSet = []; //array para guardar los valores de los campos inputs del form
 
   var table = $('#tablaUsuarios').DataTable({
-    /* ***************************** INICIO CONFIGURACION BOTON EXCEL****************************************** */
+    /* colocando elementos de la tabla en español */
+    language: {
+      decimal: '',
+      emptyTable: 'No hay información',
+      info: 'Mostrando _START_ a _END_ de _TOTAL_ Entradas',
+      infoEmpty: 'Mostrando 0 to 0 of 0 Entradas',
+      infoFiltered: '(Filtrado de _MAX_ total entradas)',
+      infoPostFix: '',
+      thousands: ',',
+      lengthMenu: 'Mostrar _MENU_ Entradas',
+      loadingRecords: 'Cargando...',
+      processing: 'Procesando...',
+      search: 'Buscar:',
+      zeroRecords: 'Sin resultados encontrados',
+      paginate: {
+        first: 'Primero',
+        last: 'Ultimo',
+        next: 'Siguiente',
+        previous: 'Anterior',
+      },
+    },
 
-    dom: 'Bfrtip',
+    /* columna que oculto y botones que irán por defecto en la ultima columna */
+    data: dataSet,
+    columnDefs: [
+      {
+        targets: [0],
+        visible: false, //ocultamos la columna de ID que es la [0]
+      },
+      {
+        targets: -1,
+        defaultContent:
+          "<div class='wrapper text-center'><div class='btn-group'><button class='btnEditar btn btn-primary' data-toggle='tooltip' title='Editar'>" +
+          iconoEditar +
+          "</button><button class='btnBorrar btn btn-danger' data-toggle='tooltip' title='Borrar'>" +
+          iconoBorrar +
+          '</button></div></div>',
+      },
+    ],
+
+    dom: 'Blfrtip',
+    /* paginación de la tabla */
+    pageLength: 5,
+    lengthMenu: [
+      [5, 10, 20, -1],
+      [5, 10, 20, 'Todos'],
+    ],
+
+    /* ***************************** INICIO CONFIGURACION BOTON EXCEL****************************************** */
     buttons: {
       dom: {
         button: {
@@ -91,49 +137,6 @@ $(document).ready(function () {
       ],
     },
     /* ***************************** FIN CONFIGURACION BOTON EXCEL *********************************** */
-    /* colocando elementos de la tabla en español */
-    language: {
-      decimal: '',
-      emptyTable: 'No hay información',
-      info: 'Mostrando _START_ a _END_ de _TOTAL_ Entradas',
-      infoEmpty: 'Mostrando 0 to 0 of 0 Entradas',
-      infoFiltered: '(Filtrado de _MAX_ total entradas)',
-      infoPostFix: '',
-      thousands: ',',
-      lengthMenu: 'Mostrar _MENU_ Entradas',
-      loadingRecords: 'Cargando...',
-      processing: 'Procesando...',
-      search: 'Buscar:',
-      zeroRecords: 'Sin resultados encontrados',
-      paginate: {
-        first: 'Primero',
-        last: 'Ultimo',
-        next: 'Siguiente',
-        previous: 'Anterior',
-      },
-    },
-    /* paginación de la tabla */
-    pageLength: 5,
-    lengthMenu: [
-      [5, 10, 20, -1],
-      [5, 10, 20, 'Todos'],
-    ],
-    data: dataSet,
-    columnDefs: [
-      {
-        targets: [0],
-        visible: false, //ocultamos la columna de ID que es la [0]
-      },
-      {
-        targets: -1,
-        defaultContent:
-          "<div class='wrapper text-center'><div class='btn-group'><button class='btnEditar btn btn-primary' data-toggle='tooltip' title='Editar'>" +
-          iconoEditar +
-          "</button><button class='btnBorrar btn btn-danger' data-toggle='tooltip' title='Borrar'>" +
-          iconoBorrar +
-          '</button></div></div>',
-      },
-    ],
   });
 
   //Eventos de FIREBASE

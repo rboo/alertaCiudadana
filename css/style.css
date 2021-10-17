@@ -309,7 +309,6 @@
 }
 
 .alerts {
-  /* background-color: green; */
   border: 2px solid rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   margin-right: 1rem;
@@ -322,31 +321,6 @@
   /* probando */
   margin-left: 100px;
 }
-
-/* .alerts::before,
-.alerts::after {
-  content: '';
-  position: absolute;
-  width: 0px;
-  left: 0;
-  top: 0;
-  height: 3px;
-  margin: 0;
-  transition: all 0.4s ease-in;
-  transition-duration: 0.5s;
-  background-color: rgba(4, 54, 20, 0.7);
-} */
-
-/* .alerts::after {
-  top: 99%;
-  right: 0;
-  left: auto;
-}
-
-.alerts:hover::before,
-.alerts:hover::after {
-  width: 100%;
-} */
 
 .left-600 {
   left: -600px;
@@ -679,22 +653,25 @@ animate__pulse
   min-width: 80px;
 }
 
-.bodyUsuarios td {
+.bodyUsuarios td,
+.bodyIncidencias td {
   font-size: 0.8rem;
   text-align: center;
   vertical-align: middle;
 }
 
-.modalUsuarios {
+.modalUsuarios,
+.modalIncidencias {
   font-size: 0.9rem;
 }
-.tabla-usuarios {
+.tabla-usuarios,
+.tabla-incidencias {
   margin-left: 7em;
   margin-top: 0;
 }
 
 .container #btnNuevo {
-  margin-bottom: 0.5em;
+  margin-bottom: 1em;
   vertical-align: center;
   display: flex;
   justify-content: space-between;
@@ -703,24 +680,79 @@ animate__pulse
   font-size: 0.9em;
 }
 
-.buttons-excel span {
-  font-size: 0.9em;
-}
-
 .dataTables_filter label {
   font-size: 0.9em;
 }
 
-#tablaUsuarios_filter input {
+#tablaUsuarios_filter input,
+#tablaIncidencias_filter input {
   width: 100%;
 }
 
-#tablaUsuarios_wrapper .dataTables_info {
+#tablaUsuarios_wrapper .dataTables_info,
+#tablaIncidencias_wrapper .dataTables_info {
   font-size: 0.8em;
 }
 
-#tablaUsuarios_paginate .pagination {
+#tablaUsuarios_paginate .pagination,
+#tablaIncidencias_paginate .pagination {
+  font-size: 0.8em;
+  margin-top: 1rem;
+}
+
+#tablaUsuarios_length,
+#tablaIncidencias_length {
   font-size: 0.9em;
+}
+
+#tablaUsuarios_wrapper .buttons-excel,
+#tablaIncidencias_wrapper .buttons-excel {
+  width: 15%;
+  font-size: 0.9em;
+}
+
+#tablaUsuarios_wrapper,
+#tablaIncidencias_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#tablaUsuarios_wrapper .dt-buttons,
+#tablaIncidencias_wrapper .dt-buttons {
+  margin-bottom: 1rem;
+}
+
+#tablaUsuarios_wrapper .dataTables_length,
+#tablaIncidencias_wrapper .dataTables_length {
+  width: 50%;
+}
+
+.tabla-usuarios .dt-buttons,
+.tabla-incidencias .dt-buttons {
+  width: 100%;
+}
+
+/* #tablaUsuarios_paginate .pagination,
+#tablaIncidencias_paginate .pagination {
+} */
+
+#tablaUsuarios_info,
+#tablaIncidencias_info {
+  margin-right: auto;
+  margin-top: 1rem;
+}
+
+#tablaUsuarios_filter,
+#tablaIncidencias_filter {
+  /* width: 50%; */
+  display: flex;
+  width: 50%;
+  justify-content: center;
+}
+
+.tabla-incidencias {
+  /* margin-left: -20%; */
+  margin-top: 2%;
 }
 
 /* ******** FIN ESTILOS CRUD USUARIOS ************ */
@@ -806,3 +838,110 @@ canvas data {
 }
 
 /* ****************** FIN ESTILOS MODAL NUEVO INCIDENTE ******** */
+
+/* ESTO VA DENTRO DE FORM INCIDENCIAS */
+/* <div class="modal-body">
+                          <input id="id" type="hidden" />
+                          <!-- ID que vamos a recibir de firebase -->
+                          <div class="form-group">
+                            <label>TITULO</label>
+                            <input
+                              id="titulo"
+                              type="text"
+                              class="form-control"
+                              required
+                              maxlength="8"
+                            />
+                          </div>
+                          <div class="form-group">
+                            <label>Nombres</label>
+                            <input
+                              id="nombres"
+                              type="text"
+                              class="form-control"
+                              required
+                            />
+                          </div>
+                          <div class="form-group">
+                            <label>Apellidos</label>
+                            <input
+                              id="apellidos"
+                              type="text"
+                              class="form-control"
+                              required
+                            />
+                          </div>
+                          <div class="form-group">
+                            <label>Correo Electrónico</label>
+                            <input
+                              id="email"
+                              type="text"
+                              class="form-control"
+                              required
+                            />
+                          </div>
+                          <div class="form-group">
+                            <label>Contraseña</label>
+                            <input
+                              id="password"
+                              type="password"
+                              class="form-control"
+                              required
+                            />
+                          </div>
+                          <div class="form-group">
+                            <label>Número de Teléfono</label>
+                            <input
+                              id="telefono"
+                              type="text"
+                              class="form-control"
+                              required
+                            />
+                          </div>
+                          <div class="form-group">
+                            <label>Dirección</label>
+                            <input
+                              id="direccion"
+                              type="text"
+                              class="form-control"
+                              required
+                            />
+                          </div>
+                          <div class="form-group">
+                            <label>Fecha de Nacimiento</label>
+                            <input
+                              id="fecnac"
+                              type="date"
+                              class="form-control"
+                              required
+                            />
+                          </div>
+                          <div class="form-group">
+                            <label for="">Sexo</label>
+                            <select name="sexo" id="sexo">
+                              <option value="Masculino">Masculino</option>
+                              <option value="Femenino" selected>
+                                Femenino
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-dismiss="modal"
+                            tabindex="2"
+                          >
+                            Cancelar
+                          </button>
+                          <button
+                            type="submit"
+                            id="btnGuardar"
+                            class="btn btn-primary"
+                            translate="1"
+                          >
+                            Guardar
+                          </button>
+                        </div> */
+/* ESTO VA DENTRO DE FORM INCIDENCIAS */

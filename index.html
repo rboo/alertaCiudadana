@@ -134,6 +134,7 @@
             <li><a href="#">Box Icons</a></li>
           </ul>
         </li> -->
+
           <li>
             <a href="#">
               <i class="bx bx-compass"></i>
@@ -141,6 +142,18 @@
             </a>
             <ul class="sub-menu blank">
               <li><a class="link_name" href="#">CRUD Usuarios</a></li>
+            </ul>
+          </li>
+
+          <li>
+            <a href="#">
+              <i class="bx bx-shape-square"></i>
+              <span class="link_name" id="btnCrudIncidencias"
+                >CRUD Incidencias</span
+              >
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="#">CRUD Incidencias</a></li>
             </ul>
           </li>
 
@@ -370,16 +383,10 @@
         <!-- --------- INICIO GRAFICAS ------------ -->
         <div class="graficasContainer d-none"></div>
         <canvas id="myChart" class="graficaIncidencias d-none"></canvas>
-
         <!-- --------- FIN GRAFICAS ------------ -->
 
-        <!-- ---------------- TABLA USUARIOS ----------------- -->
+        <!-- ---------------- INICIO TABLA USUARIOS ----------------- -->
         <div class="tabla-usuarios d-none">
-          <!-- <div class="jumbotron jumbotron-fluid">
-          <div class="container">
-            <h1 class="display-8">CRUD</h1>
-          </div>
-        </div> -->
           <div class="container">
             <div class="row">
               <div class="col-lg-12">
@@ -404,7 +411,7 @@
                   </svg>
                   Nuevo Usuario
                 </button>
-                <!--Modal-->
+                <!------- Inicio Modal ----------------->
                 <div
                   id="modalAltaEdicion"
                   class="modal fade modalUsuarios"
@@ -537,7 +544,7 @@
                     </div>
                   </div>
                 </div>
-                <!-- Fin Modal -->
+                <!----------------- Fin Modal ----------------->
                 <!-- diseño de la tabla -->
                 <!-- <table id="tablaProductos" class="table table-bordered"> -->
                 <table
@@ -565,6 +572,86 @@
             </div>
           </div>
         </div>
+        <!-- ---------------- FIN TABLA USUARIOS ----------------- -->
+
+        <!-- ---------------- INICIO TABLA INCIDENCIAS ----------------- -->
+        <div class="tabla-incidencias d-none">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-12">
+                <!-- <button
+                  id="btnNuevo"
+                  class="btn btn-info"
+                  data-toggle="tooltip"
+                  title="Nuevo Usuario"
+                >
+                  <svg
+                    class="bi bi-plus-circle-fill"
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5V4z"
+                    />
+                  </svg>
+                  Nuevo Usuario
+                </button> -->
+                <!-------------------- Inicio Modal ---------------->
+                <div
+                  id="modalAltaEdicion"
+                  class="modal fade modalUsuarios"
+                  tabindex="-1"
+                  role="dialog"
+                  aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header bg-primary text-light">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                          Ingreso de Datos de Incidencias
+                        </h5>
+                        <button
+                          type="button"
+                          class="close"
+                          data-dismiss="modal"
+                          aria-label="Close"
+                        >
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <form></form>
+                    </div>
+                  </div>
+                </div>
+                <!------------------- Fin Modal --------------------->
+                <!-- diseño de la tabla -->
+                <!-- <table id="tablaProductos" class="table table-bordered"> -->
+                <table
+                  id="tablaIncidencias"
+                  class="table table-striped table-bordered"
+                  style="width: 100%"
+                >
+                  <thead class="text-center table-head">
+                    <tr>
+                      <th>ID</th>
+                      <th>TIPO DE INCIDENTE</th>
+                      <th>FECHA</th>
+                      <th>HORA</th>
+                      <th>ACCIONES</th>
+                    </tr>
+                  </thead>
+                  <tbody id="bodyIncidencias" class="bodyIncidencias"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ---------------- FIN TABLA INCIDENCIAS ----------------- -->
       </section>
     </div>
 
@@ -599,27 +686,29 @@
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.14.4/dist/sweetalert2.all.min.js"></script>
 
+    <!-- Para los estilos en Excel     -->
+    <script src="https://cdn.jsdelivr.net/npm/datatables-buttons-excel-styles@1.1.1/js/buttons.html5.styles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/datatables-buttons-excel-styles@1.1.1/js/buttons.html5.styles.templates.min.js"></script>
+
     <!-- inicio probando codigo -->
     <!-- Para usar los botones -->
     <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
 
-    <!-- Para los estilos en Excel     -->
-    <script src="https://cdn.jsdelivr.net/npm/datatables-buttons-excel-styles@1.1.1/js/buttons.html5.styles.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/datatables-buttons-excel-styles@1.1.1/js/buttons.html5.styles.templates.min.js"></script>
     <!-- fin probando codigo -->
 
     <!-- cdn de graficos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Mis scripts -->
+    <script src="./js/map.js"></script>
     <script src="./js/FireBaseConfig.js"></script>
     <script src="./js/util.js"></script>
     <script src="./js/dashboard.js"></script>
-    <script src="./js/map.js"></script>
     <script src="./js/app.js"></script>
     <script src="./js/incidentes.js"></script>
     <script src="./js/crudUsuarios.js"></script>
+    <script src="./js/crudIncidencias.js"></script>
 
     <!-- google map -->
 
