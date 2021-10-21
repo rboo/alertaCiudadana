@@ -15,6 +15,7 @@ let btnLogin = document.querySelector('#btnLogin');
 let btnGraficas = document.getElementById('btnGraficas');
 let graficasContainer = document.querySelector('.graficasContainer'); //no se esta utilizando por ahora
 let graficaIncidencias = document.querySelector('.graficaIncidencias');
+let imagenPrincipal = document.querySelector('.img-main-dashboard');
 
 /* ********** FIN DECLARACION DE VARIABLES ************* */
 
@@ -98,6 +99,7 @@ if (btnCrudUsuarios !== null) {
     alertsDetails.classList.add('d-none');
     mapAlerts.classList.add('d-none');
     tablaIncidencias.classList.add('d-none');
+    imagenPrincipal.classList.add('d-none');
   });
 }
 
@@ -113,6 +115,7 @@ if (btnCrudIncidencias !== null) {
     alertsDetails.classList.add('d-none');
     mapAlerts.classList.add('d-none');
     tablaUsuarios.classList.add('d-none');
+    imagenPrincipal.classList.add('d-none');
   });
 }
 
@@ -120,15 +123,16 @@ if (btnCrudIncidencias !== null) {
 
 /* ************** INICIO BOTON GRAFICAS ***************** */
 if (btnGraficas !== null) {
-  btnGraficas.addEventListener('click', () => {
-    graficasContainer.classList.remove('d-none');
-    sidebar.classList.add('close');
-    alerts.classList.add('d-none');
-    alertsDetails.classList.add('d-none');
-    mapAlerts.classList.add('d-none');
-    graficaIncidencias.classList.remove('d-none');
-    console.log('hice click en graficas');
-  });
+  // btnGraficas.addEventListener('click', () => {
+  //   graficasContainer.classList.remove('d-none');
+  //   sidebar.classList.add('close');
+  //   alerts.classList.add('d-none');
+  //   alertsDetails.classList.add('d-none');
+  //   mapAlerts.classList.add('d-none');
+  //   graficaIncidencias.classList.remove('d-none');
+  //   imagenPrincipal.classList.add('d-none');
+  //   console.log('hice click en graficas');
+  // });
 }
 Chart.defaults.font.size = 20;
 var ctx = document.getElementById('myChart').getContext('2d');
@@ -200,6 +204,7 @@ if (alertHistory != null) {
     mapAlerts.classList.add('d-none');
     tablaUsuarios.classList.add('d-none');
     tablaIncidencias.classList.add('d-none');
+    imagenPrincipal.classList.add('d-none');
   });
 }
 

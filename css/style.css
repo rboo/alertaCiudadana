@@ -8,6 +8,19 @@
   font-family: 'Poppins', sans-serif;
 }
 
+.img-main-dashboard {
+  width: 80vw;
+  height: 80vh;
+  position: absolute;
+  margin-right: auto;
+  /* margin-left: auto; */
+  left: 10rem;
+  top: 6rem;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
 .sidebar {
   position: fixed;
   top: 0;
