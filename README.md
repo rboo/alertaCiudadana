@@ -6,6 +6,8 @@
 
 - [ ] Lista de incidentes tenga el ultimo incidente en la parte superior. **_(Ricardo)_**
 
+- [ ] habilitar la vista de las fotos de la alerta personalizada, no logro encontrar la ruta a storage de firebase. **_(Ricardo)_**
+
 - [ ] Corregir que no se guarden usuarios con el mismo correo en el nodo usuarios(urgente). **_(Ricardo)_**
 
 - [ ] Corregir porque los usuarios se guardan con un UID diferente cuando se crean desde la web, no son iguales los UID del usuarios en el nodo usuarios que en Authentication(opcional). **_(Ricardo)_**
