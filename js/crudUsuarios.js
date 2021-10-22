@@ -335,13 +335,7 @@ function createUser(email, password) {
     .catch(error => {
       var errorCode = error.code;
       var errorMessage = error.message;
-      /* probando codigo */
-      filaEliminada = $(this); //captura la fila eliminada para pasarla al event CHILD_REMOVED
-      let fila = $('#tablaUsuarios')
-        .dataTable()
-        .fnGetData($(this).closest('tr'));
-      let id = fila[0]; //capturamos el atributo ID de la fila
-      db.ref(`usuarios/${id}`).remove(); //eliminamos el producto de firebase
+
       alert(`Error ${errorCode} - ${errorMessage}`);
     });
 }
