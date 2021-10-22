@@ -5,6 +5,7 @@ function initMap() {
     center: { lat: 0, lng: 0 },
     zoom: 12,
   });
+
   loadIncidents();
 }
 
@@ -34,9 +35,9 @@ function initMap() {
 // }
 // }
 
-let temporizadorMap = setTimeout(() => {
-  addMarquer();
-}, 10000);
+// let temporizadorMap = setTimeout(() => {
+//   addMarquer();
+// }, 10000);
 
 let addMarquer = () => {
   let elements = document.querySelectorAll('.alerts__list-link');

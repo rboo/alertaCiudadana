@@ -15,8 +15,12 @@
   [Ver imagen UID usuarios](https://i.imgur.com/Ve3ByFi.png 'Ver imagen UID usuarios')  
   [Ver imagen UID Authentication](https://i.imgur.com/HdEnZTp.png 'Ver imagen UID Authentication')
 
+- [x] Configurar las alertas con una leyenda de 4 colores dependiendo del tipo de alerta para una rapida identificación. **_(Fernando)_**
+
 - [x] Actualizar el README. **_(Fernando)_**
 
 - [x] Corregir crud usuarios para que se guarde el tipo de usuario. **_(Fernando)_**
+
+- [x] Corregir que la pagina tenga que recargar cada vez que llega una alerta nueva. **_(Fernando)_**
 
 ---
