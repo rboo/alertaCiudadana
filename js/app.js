@@ -11,6 +11,7 @@ let btnCrudUsuarios = document.querySelector('#btnCrudUsuarios');
 let btnCrudIncidencias = document.querySelector('#btnCrudIncidencias');
 let tablaUsuarios = document.querySelector('.tabla-usuarios');
 let tablaIncidencias = document.querySelector('.tabla-incidencias');
+let btnDashboard = document.getElementById('btnDashboard');
 let btnLogin = document.querySelector('#btnLogin');
 let btnGraficas = document.getElementById('btnGraficas');
 let graficasContainer = document.querySelector('.graficasContainer'); //no se esta utilizando por ahora
@@ -104,6 +105,20 @@ if (btnCrudUsuarios !== null) {
 }
 
 /* ******* FIN BOTON CRUD USUARIOS ************ */
+
+/* ********* INICIO BOTON DASHBOARD *************** */
+if (btnDashboard !== null) {
+  btnDashboard.addEventListener('click', () => {
+    tablaUsuarios.classList.add('d-none');
+    sidebar.classList.add('close');
+    alerts.classList.add('d-none');
+    alertsDetails.classList.add('d-none');
+    mapAlerts.classList.add('d-none');
+    tablaIncidencias.classList.add('d-none');
+    imagenPrincipal.classList.remove('d-none');
+  });
+}
+/* ********* FIN BOTON DASHBOARD *************** */
 
 // INICIO boton CRUD INCIDENCIAS ************//
 
