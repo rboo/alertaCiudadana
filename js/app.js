@@ -121,61 +121,7 @@ if (btnCrudIncidencias !== null) {
 
 /* ******* FIN BOTON CRUD INCIDENCIAS ************ */
 
-/* ************** INICIO BOTON GRAFICAS ***************** */
-if (btnGraficas !== null) {
-  // btnGraficas.addEventListener('click', () => {
-  //   graficasContainer.classList.remove('d-none');
-  //   sidebar.classList.add('close');
-  //   alerts.classList.add('d-none');
-  //   alertsDetails.classList.add('d-none');
-  //   mapAlerts.classList.add('d-none');
-  //   graficaIncidencias.classList.remove('d-none');
-  //   imagenPrincipal.classList.add('d-none');
-  //   console.log('hice click en graficas');
-  // });
-}
-Chart.defaults.font.size = 20;
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: ['Enero', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-    datasets: [
-      {
-        label: '# of Votes',
-        data: [10, 19, 3, 5, 2, 3],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-        ],
-        // fontSize: 40,
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-        ],
-        borderWidth: 1,
-      },
-    ],
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
-  },
-});
-
-/* ************** FIN BOTON GRAFICAS ***************** */
-
+/* ******** INICIO BOTON MENU SIDEBAR *************** */
 let arrow = document.querySelectorAll('.arrow');
 for (var i = 0; i < arrow.length; i++) {
   arrow[i].addEventListener('click', e => {
@@ -192,7 +138,9 @@ if (sidebar !== null || sidebarBtn !== null) {
   });
 }
 
-/************  incio BOTON HISTORIAL ALERTAS **********************/
+/* ******** FIN BOTON MENU SIDEBAR *************** */
+
+/************  INICIO BOTON HISTORIAL ALERTAS **********************/
 if (alertHistory != null) {
   alertHistory.addEventListener('click', () => {
     alerts.classList.remove('d-none');

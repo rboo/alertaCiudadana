@@ -57,7 +57,7 @@ $(document).ready(function () {
     data: dataSet,
     columnDefs: [
       {
-        targets: [0],
+        targets: [0, 5],
         visible: false, //ocultamos la columna de ID que es la [0]
       },
       {
@@ -95,7 +95,7 @@ $(document).ready(function () {
 
           //defino que columnas quiero que se vean
           exportOptions: {
-            columns: [1, 2, 3, 4, 5, 6, 7, 8],
+            columns: [1, 2, 3, 4, 6, 7, 8, 9, 10],
           },
 
           //definimos los parametros al exportar a excel
@@ -146,6 +146,13 @@ $(document).ready(function () {
   coleccionUsuarios.on('child_added', datos => {
     // console.log(datos); //mostramos todos los datos de la coleccion desde firebase
     // console.log(datos.key); //mostramos las claves (los IDs autogenerados desde firebase)
+    let tipoUsuario;
+    if (datos.child('tipoacceso').val() === '1') {
+      tipoUsuario = 'Serenazgo';
+    } else {
+      tipoUsuario = 'Ciudadano';
+    }
+
     dataSet = [
       datos.key,
       datos.child('numerodocumento').val(),
@@ -156,6 +163,9 @@ $(document).ready(function () {
       datos.child('direccion').val(),
       datos.child('telefono').val(),
       datos.child('fechanac').val(),
+      datos.child('sexo').val(),
+      tipoUsuario,
+      // datos.child('tipoacceso').val(),
     ];
     table.rows.add([dataSet]).draw();
   });
@@ -163,6 +173,11 @@ $(document).ready(function () {
   //CHILD_CHANGED - evento para modificar o actualizar hijo a la base
   //luego de EDITAR mostramos los datos
   coleccionUsuarios.on('child_changed', datos => {
+    // if (datos.child('tipoacceso').val() == '1') {
+    //   tipoUsuario = 'Serenazgo';
+    // } else {
+    //   tipoUsuario = 'Ciudadano';
+    // }
     dataSet = [
       datos.key,
       datos.child('numerodocumento').val(),
@@ -173,6 +188,8 @@ $(document).ready(function () {
       datos.child('direccion').val(),
       datos.child('telefono').val(),
       datos.child('fechanac').val(),
+      datos.child('sexo').val(),
+      datos.child('tipoacceso').val(),
     ];
     table.row(filaEditada).data(dataSet).draw();
   });
@@ -197,12 +214,13 @@ $(document).ready(function () {
     let direccion = $.trim($('#direccion').val());
     let fecnac = $.trim($('#fecnac').val());
     let imagen = '';
+    let tipoAcceso = $.trim($('#tipo-usuario').val());
     let sexo = $.trim($('#sexo').val());
-    let tipoAcceso = '';
     let host = '1'; //1 -> web
 
     let idFirebase = id;
     if (idFirebase == '') {
+      createUser(email, password);
       idFirebase = coleccionUsuarios.push().key;
     }
 
@@ -223,7 +241,7 @@ $(document).ready(function () {
 
     actualizacionData = {};
     actualizacionData[`/${idFirebase}`] = data;
-    createUser(email, password);
+
     coleccionUsuarios.update(actualizacionData);
     id = '';
     $('form').trigger('reset'); //limpiamos los campos del formulario
@@ -249,15 +267,18 @@ $(document).ready(function () {
     filaEditada = table.row($(this).parents('tr'));
     let fila = $('#tablaUsuarios').dataTable().fnGetData($(this).closest('tr'));
     let id = fila[0];
-    console.log(id);
+    // console.log(id);
     let dni = $(this).closest('tr').find('td:eq(0)').text();
     let apellidos = $(this).closest('tr').find('td:eq(1)').text();
     let nombres = $(this).closest('tr').find('td:eq(2)').text();
     let email = $(this).closest('tr').find('td:eq(3)').text();
-    let password = $(this).closest('tr').find('td:eq(4)').text();
-    let direccion = $(this).closest('tr').find('td:eq(5)').text();
-    let telefono = $(this).closest('tr').find('td:eq(6)').text();
-    let fecnac = $(this).closest('tr').find('td:eq(7)').text();
+    // let password = $(this).closest('tr').find('td:eq(4)').text();
+    let password = fila[5];
+    let direccion = $(this).closest('tr').find('td:eq(4)').text();
+    let telefono = $(this).closest('tr').find('td:eq(5)').text();
+    let fecnac = $(this).closest('tr').find('td:eq(6)').text();
+    let sexo = $(this).closest('tr').find('td:eq(7)').text();
+    let tipoUsuario = $(this).closest('tr').find('td:eq(8)').text();
     $('#id').val(id);
     $('#dni').val(dni);
     $('#nombres').val(nombres);
@@ -267,6 +288,14 @@ $(document).ready(function () {
     $('#telefono').val(telefono);
     $('#direccion').val(direccion);
     $('#fecnac').val(fecnac);
+    $('#sexo').val(sexo);
+    if (tipoUsuario == 'Ciudadano') {
+      $('#tipo-usuario').val('2');
+    } else {
+      $('#tipo-usuario').val('1');
+    }
+
+    // $('#tipo-usuario').val(tipoUsuario);
     $('#modalAltaEdicion').modal('show');
   });
 
@@ -300,11 +329,19 @@ function createUser(email, password) {
     .then(userCredential => {
       // Signed in
       var user = userCredential.user;
+
       console.info(`Usuario creado correctamente ${user}`);
     })
     .catch(error => {
       var errorCode = error.code;
       var errorMessage = error.message;
+      /* probando codigo */
+      filaEliminada = $(this); //captura la fila eliminada para pasarla al event CHILD_REMOVED
+      let fila = $('#tablaUsuarios')
+        .dataTable()
+        .fnGetData($(this).closest('tr'));
+      let id = fila[0]; //capturamos el atributo ID de la fila
+      db.ref(`usuarios/${id}`).remove(); //eliminamos el producto de firebase
       alert(`Error ${errorCode} - ${errorMessage}`);
     });
 }

@@ -158,17 +158,6 @@
           </li>
 
           <li>
-            <a href="#">
-              <i class="bx bx-cog"></i>
-              <span class="link_name btnGraficas" id="btnGraficas"
-                >Gráficas</span
-              >
-            </a>
-            <ul class="sub-menu blank">
-              <li><a class="link_name" href="#">Gráficas</a></li>
-            </ul>
-          </li>
-          <li>
             <div class="profile-details">
               <div class="profile-content">
                 <img
@@ -386,11 +375,6 @@
         </div>
         <!-- ---------------- Fin mapa --------------------------- -->
 
-        <!-- --------- INICIO GRAFICAS ------------ -->
-        <div class="graficasContainer d-none"></div>
-        <canvas id="myChart" class="graficaIncidencias d-none"></canvas>
-        <!-- --------- FIN GRAFICAS ------------ -->
-
         <!-- ---------------- INICIO TABLA USUARIOS ----------------- -->
         <div class="tabla-usuarios d-none">
           <div class="container">
@@ -519,12 +503,22 @@
                             />
                           </div>
                           <div class="form-group">
-                            <label for="">Sexo</label>
+                            <label for="sexo">Sexo</label>
+                            <br />
                             <select name="sexo" id="sexo">
-                              <option value="Masculino">Masculino</option>
-                              <option value="Femenino" selected>
-                                Femenino
+                              <option value="Masculino" selected>
+                                Masculino
                               </option>
+                              <option value="Femenino">Femenino</option>
+                            </select>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="tipo-usuario">Tipo de Usuario</label>
+                            <br />
+                            <select name="tipo-usuario" id="tipo-usuario">
+                              <option value="1">Agente serenazgo</option>
+                              <option value="2" selected>Ciudadano</option>
                             </select>
                           </div>
                         </div>
@@ -569,6 +563,8 @@
                       <th>DIRECCION</th>
                       <th>TELÉFONO</th>
                       <th>FEC. NAC.</th>
+                      <th>SEXO</th>
+                      <th>TIPO USUARIO</th>
                       <th>ACCIONES</th>
                     </tr>
                   </thead>
@@ -704,8 +700,6 @@
 
     <!-- fin probando codigo -->
 
-    <!-- cdn de graficos -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Mis scripts -->
     <script src="./js/map.js"></script>
     <script src="./js/FireBaseConfig.js"></script>
