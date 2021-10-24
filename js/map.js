@@ -51,11 +51,11 @@ let addMarquer = () => {
       var dataAttribute = elements[i].getAttribute('data-id');
       console.log('data', dataAttribute);
       loadIncidentDetail(dataAttribute);
-
+      alerts.classList.add('d-none');
+      leyendaAlertas.classList.add('d-none');
       alertDetails.classList.remove('d-none');
       mapAlerts.classList.remove('d-none');
       // alerts.classList.remove('left-none');
-      alerts.classList.add('d-none');
     });
   }
 };

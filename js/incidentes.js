@@ -22,6 +22,10 @@ function loadIncidents() {
     .auth()
     .signInWithEmailAndPassword(user, key)
     .then(() => {
+      //probando codigo
+      // let audio = './audio/alert.mp3';
+      // audio.play();
+      //Fin probando codigo
       var starCountRef = dbref.ref().child('incidentes');
       starCountRef.on('value', snapshot => {
         snapshot.forEach(function (childSnapshot) {
@@ -49,6 +53,7 @@ function loadIncidents() {
         });
         console.log(`El contador actual es de: ${cont}`);
         contActual = cont;
+        index = 0;
 
         // console.log(childData.get.count());
         // primercont.forEach(el => {
@@ -57,6 +62,7 @@ function loadIncidents() {
 
         if (cont2 !== cont) {
           mainBody.classList.add('modal-open');
+
           modalNuevoIncidente.classList.add('show');
           modalNuevoIncidente.style.display = 'block';
         }
@@ -84,6 +90,7 @@ btnCloseModal.forEach(el => {
     mapAlerts.classList.add('d-none');
     tablaIncidencias.classList.add('d-none');
     alerts.classList.add('left-none');
+    leyendaAlertas.classList.remove('d-none');
   });
 });
 //FIN Configuracion de boton CERRAR de modal aviso nuevo incidente
@@ -109,14 +116,14 @@ function showList(data, index) {
   let hour = tConvert(data.hora);
   document.getElementById(
     'alerts__list',
-  ).innerHTML += `<li class="alerts__list-items">
+  ).innerHTML += `<li class="alerts__list-items alert-type-${data.titulo}">
     <a class="alerts__list-link" href="#" id="alert${index}" data-id="${data.uid}">
     <span class="alerts__list-date">${data.fecha}</span>
     <span class="alerts__list-hour">${hour}</span>
     </a>
     </li>`;
   data = null;
-  index = null;
+  index = 0;
 }
 
 function loadIncidentDetail(uid) {

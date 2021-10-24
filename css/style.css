@@ -330,11 +330,12 @@
   width: 300px;
   left: -600px;
   transition: 0.9s all ease;
-  max-height: 80vh;
+  /* max-height: 80vh; */
   overflow-y: auto;
   position: relative;
   /* probando */
   margin-left: 100px;
+  height: 78vh;
 }
 
 .left-600 {
@@ -348,24 +349,6 @@
 .alerts__list-items {
   box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3),
     0 0 40px rgba(0, 0, 0, 0.1) inset;
-}
-
-.alerts__list-items:nth-child(odd) {
-  background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
-}
-
-.alerts__list-items:nth-child(even) {
-  background: #00f260; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #0575e6,
-    #00f260
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #0575e6,
-    #00f260
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .alerts__list-items {
@@ -420,6 +403,46 @@
   height: 100%;
   object-fit: cover;
 }
+
+.leyenda-alertas {
+  position: absolute;
+  bottom: 0;
+  left: 100px;
+  display: flex;
+  /* text-decoration: none; */
+}
+
+.leyenda-alertas__item {
+  list-style: none;
+  margin-left: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.leyenda-alertas__item::before {
+  content: '';
+  background-color: #ffd866;
+  width: 20px;
+  height: 20px;
+  margin-right: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.leyenda-alertas__violencia::before {
+  background-color: tomato;
+}
+
+.leyenda-alertas__asalto::before {
+  background-color: #a9dc76;
+}
+
+.leyenda-alertas__sospechoso::before {
+  background-color: #78dce8;
+}
+
 /* 
 animate__pulse
  */
@@ -858,4 +881,21 @@ canvas data {
   padding-right: 15px;
   width: 80px;
   /* padding-bottom: ; */
+}
+
+/* li[class~="alert-type-Asalto"]{ background-color:red; } */
+.alerts__list-items {
+  background-color: #ffd866;
+}
+
+.alert-type-Asalto {
+  background-color: #a9dc76;
+}
+
+.alert-type-Sospechoso {
+  background-color: #78dce8;
+}
+
+.alert-type-Nuevo {
+  background-color: tomato;
 }

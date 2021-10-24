@@ -17,6 +17,7 @@ let btnGraficas = document.getElementById('btnGraficas');
 let graficasContainer = document.querySelector('.graficasContainer'); //no se esta utilizando por ahora
 let graficaIncidencias = document.querySelector('.graficaIncidencias');
 let imagenPrincipal = document.querySelector('.img-main-dashboard');
+let leyendaAlertas = document.querySelector('#leyenda-alertas');
 
 /* ********** FIN DECLARACION DE VARIABLES ************* */
 
@@ -94,13 +95,14 @@ if (btnLogin !== null) {
 
 if (btnCrudUsuarios !== null) {
   btnCrudUsuarios.addEventListener('click', () => {
-    tablaUsuarios.classList.remove('d-none');
     sidebar.classList.add('close');
     alerts.classList.add('d-none');
     alertsDetails.classList.add('d-none');
     mapAlerts.classList.add('d-none');
     tablaIncidencias.classList.add('d-none');
     imagenPrincipal.classList.add('d-none');
+    leyendaAlertas.classList.add('d-none');
+    tablaUsuarios.classList.remove('d-none');
   });
 }
 
@@ -115,6 +117,7 @@ if (btnDashboard !== null) {
     alertsDetails.classList.add('d-none');
     mapAlerts.classList.add('d-none');
     tablaIncidencias.classList.add('d-none');
+    leyendaAlertas.classList.add('d-none');
     imagenPrincipal.classList.remove('d-none');
   });
 }
@@ -124,13 +127,14 @@ if (btnDashboard !== null) {
 
 if (btnCrudIncidencias !== null) {
   btnCrudIncidencias.addEventListener('click', () => {
-    tablaIncidencias.classList.remove('d-none');
     sidebar.classList.add('close');
     alerts.classList.add('d-none');
     alertsDetails.classList.add('d-none');
     mapAlerts.classList.add('d-none');
     tablaUsuarios.classList.add('d-none');
     imagenPrincipal.classList.add('d-none');
+    leyendaAlertas.classList.add('d-none');
+    tablaIncidencias.classList.remove('d-none');
   });
 }
 
@@ -158,7 +162,6 @@ if (sidebar !== null || sidebarBtn !== null) {
 /************  INICIO BOTON HISTORIAL ALERTAS **********************/
 if (alertHistory != null) {
   alertHistory.addEventListener('click', () => {
-    alerts.classList.remove('d-none');
     // alerts.classList.toggle('left-none');
     alerts.classList.add('left-none');
     sidebar.classList.toggle('close');
@@ -168,6 +171,8 @@ if (alertHistory != null) {
     tablaUsuarios.classList.add('d-none');
     tablaIncidencias.classList.add('d-none');
     imagenPrincipal.classList.add('d-none');
+    leyendaAlertas.classList.remove('d-none');
+    alerts.classList.remove('d-none');
   });
 }
 
