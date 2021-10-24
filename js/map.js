@@ -39,6 +39,7 @@ function initMap() {
 //   addMarquer();
 // }, 10000);
 
+/* ************* INICIO CONFIGURACION DE BOTONES LISTA DE ALERTAS PARA MOSTRAR DETALLE ******* */
 let addMarquer = () => {
   let elements = document.querySelectorAll('.alerts__list-link');
   let alertDetails = document.querySelector('.alerts-details');
@@ -47,15 +48,18 @@ let addMarquer = () => {
 
   for (let i = 0; i < elements.length; i++) {
     elements[i].addEventListener('click', e => {
-      console.log('hice click en un boton');
       var dataAttribute = elements[i].getAttribute('data-id');
       console.log('data', dataAttribute);
       loadIncidentDetail(dataAttribute);
       alerts.classList.add('d-none');
       leyendaAlertas.classList.add('d-none');
       alertDetails.classList.remove('d-none');
+      // alertDetails.classList.remove('left-600');
+      alertDetails.style.opacity = 1;
       mapAlerts.classList.remove('d-none');
       // alerts.classList.remove('left-none');
     });
   }
 };
+
+/* ************* FIN CONFIGURACION DE BOTONES LISTA DE ALERTAS PARA MOSTRAR DETALLE ******* */

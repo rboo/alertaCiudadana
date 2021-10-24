@@ -21,28 +21,15 @@ function loadIncidents() {
   firebase
     .auth()
     .signInWithEmailAndPassword(user, key)
-    .then(() => {
-      //probando codigo
-      // let audio = './audio/alert.mp3';
-      // audio.play();
-      //Fin probando codigo
-      var starCountRef = dbref.ref().child('incidentes');
-      starCountRef.on('value', snapshot => {
-        snapshot.forEach(function (childSnapshot) {
-          cont2++; //contador de incidencias
-        });
-        console.log('segundo contador: ' + cont2);
-      });
-    })
     .then(userCredential => {
       // Signed in
       // var user = userCredential.user;
       // ...
-
       var starCountRef = dbref.ref().child('incidentes');
       starCountRef.on('value', snapshot => {
         document.getElementById('alerts__list').innerHTML = '';
         snapshot.forEach(function (childSnapshot) {
+          cont2++;
           index++;
           var childData = childSnapshot.val();
           console.log('data', childData);
@@ -55,14 +42,9 @@ function loadIncidents() {
         contActual = cont;
         index = 0;
 
-        // console.log(childData.get.count());
-        // primercont.forEach(el => {
-        //   console.log(el);
-        // });
-
+        //condicion para que muestre el modal de alerta de nuevo incidente
         if (cont2 !== cont) {
           mainBody.classList.add('modal-open');
-
           modalNuevoIncidente.classList.add('show');
           modalNuevoIncidente.style.display = 'block';
         }
@@ -81,8 +63,10 @@ function loadIncidents() {
 //Configuracion de boton CERRAR de modal aviso nuevo incidente
 btnCloseModal.forEach(el => {
   el.addEventListener('click', () => {
+    mainBody.classList.remove('modal-open');
+    modalNuevoIncidente.style.display = '';
+
     modalNuevoIncidente.classList.remove('show');
-    modalNuevoIncidente.classList.add('d-none');
     imagenPrincipal.classList.add('d-none');
     tablaUsuarios.classList.add('d-none');
     sidebar.classList.add('close');
@@ -90,6 +74,7 @@ btnCloseModal.forEach(el => {
     mapAlerts.classList.add('d-none');
     tablaIncidencias.classList.add('d-none');
     alerts.classList.add('left-none');
+    alerts.classList.remove('d-none');
     leyendaAlertas.classList.remove('d-none');
   });
 });
@@ -192,15 +177,15 @@ function showDetailIncident(dataIncidente, dataUsuario) {
   //console.log("dataUser", JSON.stringify(dataUser));
   document.getElementById('alerts-details-incident').innerHTML = '';
   document.getElementById('alerts-details-incident').innerHTML = `
-<ul class="alerts-details__list">
-  <li class="alerts-details__item">
-    <span class="alerts-details__key alerts-details__title-key"
+  <a href="#" id="btn-ver-lista" class="btn-ver-lista">Volver a Lista de Incidentes</a>
+  <ul class="alerts-details__list">
+    <li class="alerts-details__item">
+      <span class="alerts-details__key alerts-details__title-key"
       >TITULO INCIDENTE:</span
     >
     <span class="alerts-details__valor alerts-details__title-valor"
-      >${dataIncidente.titulo}</span
-    >
-  </li>
+      >${dataIncidente.titulo}</span>
+    </li>
 
   <li class="alerts-details__item">
     <span class="alerts-details__key alerts-details__description-key"

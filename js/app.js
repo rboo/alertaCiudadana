@@ -167,6 +167,7 @@ if (alertHistory != null) {
     sidebar.classList.toggle('close');
     // mainContent.classList.toggle('max-w80');
     alertsDetails.classList.add('d-none');
+    alertsDetails.style.opacity = 1;
     mapAlerts.classList.add('d-none');
     tablaUsuarios.classList.add('d-none');
     tablaIncidencias.classList.add('d-none');
