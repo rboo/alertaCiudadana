@@ -8,7 +8,7 @@
 
 - [ ] habilitar la vista de las fotos de la alerta personalizada, no logro encontrar la ruta a storage de firebase. **_(Ricardo)_**
 
-- [ ] Corregir que no se guarden usuarios con el mismo correo en el nodo usuarios(urgente). **_(Ricardo)_**
+- [ ] Corregir que no se guarden usuarios con el mismo correo en el nodo usuarios(opcional por que la opcion esta en el movil). **_(Ricardo)_**
 
 - [ ] Corregir porque los usuarios se guardan con un UID diferente cuando se crean desde la web, no son iguales los UID del usuarios en el nodo usuarios que en Authentication(opcional). **_(Ricardo)_**
 
@@ -22,5 +22,9 @@
 - [x] Corregir crud usuarios para que se guarde el tipo de usuario. **_(Fernando)_**
 
 - [x] Corregir que la pagina tenga que recargar cada vez que llega una alerta nueva. **_(Fernando)_**
+
+- [ ] Quitar autenticacion al momento de listar incidentes. **_(Ricardo)_**
+
+- [ ] Agregar imagen al detalle de incidentes, solo de las personalizadas. **_(Fernando)_**
 
 ---
