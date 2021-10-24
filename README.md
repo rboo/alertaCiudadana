@@ -27,4 +27,6 @@
 
 - [ ] Agregar imagen al detalle de incidentes, solo de las personalizadas. **_(Fernando)_**
 
+- [ ] Agregar validacion de repertidos para DNI y Telefono. **_()_**
+
 ---
