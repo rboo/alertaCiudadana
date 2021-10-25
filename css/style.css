@@ -8,6 +8,11 @@
   font-family: 'Poppins', sans-serif;
 }
 
+body {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
 .img-main-dashboard {
   width: 80vw;
   height: 80vh;
@@ -490,32 +495,7 @@ animate__pulse
 .alerts-details__list {
   transition: all 1s ease;
   list-style: none;
-}
-
-.alerts-details::before,
-.alerts-details::after {
-  content: '';
-  position: absolute;
-  width: 0px;
-  left: 0;
-  top: 0;
-  height: 3px;
-  margin: 0;
-  transition: all 0.4s ease-in;
-  transition-duration: 0.5s;
-  background-color: rgba(4, 54, 20, 0.8);
-  border-radius: 10px;
-}
-
-.alerts-details::after {
-  right: 0;
-  left: auto;
-  top: 100%;
-}
-
-.alerts-details:hover::before,
-.alerts-details:hover::after {
-  width: 100%;
+  margin-bottom: 0;
 }
 
 .alerts-details__item {
@@ -535,6 +515,90 @@ animate__pulse
   font-size: 0.8rem;
   text-align: justify;
 }
+
+/* *** Inicio estilos de boton detalles de alertas para volver a la lista de alertas *** */
+.btn-ver-lista {
+  /* font-family: inherit; */
+  font-size: 0.8rem;
+  line-height: 1;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  outline: none;
+  border-radius: 0.25rem;
+  background-color: #007bff;
+  color: #fff;
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 20px 35px;
+
+  box-shadow: 0px 10px 10px -4px black;
+}
+
+.btn-ver-lista::before {
+  /* font-family: FontAwesome; */
+  content: 'Ir a Lista de Alertas';
+  position: absolute;
+  right: -200px;
+  overflow: hidden;
+  transition: all 0.7s ease;
+}
+
+.btn-ver-lista:hover::before {
+  right: 65px;
+}
+
+.btn-ver-lista:focus {
+  outline: none;
+}
+
+.btn-ver-lista:hover {
+  justify-content: start;
+  box-shadow: 0px 10px 10px -10px black;
+}
+
+.icon-flecha {
+  transition: all 0.7s ease;
+  position: absolute;
+  right: 110px;
+  /* top: 13px; */
+  font-size: 1.1rem;
+}
+
+.btn-ver-lista:hover .icon-flecha {
+  transition: all 0.7s ease;
+  right: 200px;
+}
+
+.btn-ver-lista::after {
+  background: #fff;
+  content: 'ss';
+  height: 155px;
+  left: -75px;
+  opacity: 0.2;
+  position: absolute;
+  top: -50px;
+  transform: rotate(35deg);
+  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  width: 50px;
+  z-index: 100;
+}
+
+.btn-ver-lista:hover::after {
+  left: 120%;
+  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* *** Fin estilos de boton detalles de alertas para volver a la lista de alertas *** */
 
 /* *********************************************************** */
 /* ************** ESTILOS DE LOGIN ************************ */
@@ -875,4 +939,23 @@ animate__pulse
 
 .alert-type-Nuevo {
   background-color: tomato;
+}
+
+/* probando codigo */
+.alerts-details__item-photo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.alerts-details__photo-valor {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  color: black;
+}
+
+.alerts-details__photo-valor:hover {
+  text-decoration: none;
+  color: tomato;
+  font-weight: 700;
 }

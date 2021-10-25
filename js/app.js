@@ -14,6 +14,7 @@ let tablaIncidencias = document.querySelector('.tabla-incidencias');
 let btnDashboard = document.getElementById('btnDashboard');
 let btnLogin = document.querySelector('#btnLogin');
 let btnGraficas = document.getElementById('btnGraficas');
+let boton = document.querySelector('.boton');
 let graficasContainer = document.querySelector('.graficasContainer'); //no se esta utilizando por ahora
 let graficaIncidencias = document.querySelector('.graficaIncidencias');
 let imagenPrincipal = document.querySelector('.img-main-dashboard');
@@ -178,6 +179,7 @@ if (alertHistory != null) {
 }
 
 /**************** FIN BOTON HISTORIAL ALERTAS **********************/
+
 // let botonRecargar = document.getElementById('boton-recargar');
 // botonRecargar.addEventListener('click', () => {
 //   location.reload();

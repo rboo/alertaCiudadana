@@ -1,4 +1,5 @@
 var map;
+let btnVerLista = document.getElementById('btn-ver-lista');
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -57,6 +58,7 @@ let addMarquer = () => {
       // alertDetails.classList.remove('left-600');
       alertDetails.style.opacity = 1;
       mapAlerts.classList.remove('d-none');
+
       // alerts.classList.remove('left-none');
     });
   }

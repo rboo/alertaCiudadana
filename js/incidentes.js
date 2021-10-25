@@ -12,7 +12,21 @@ let btnActivarModal = document.querySelector('.btn-activar-modal');
 let mainBody = document.getElementById('main-body');
 let btnCloseModal = document.querySelectorAll('.btn-close-modal');
 let containerModal2 = document.querySelector('.container-modal2');
-console.log(btnCloseModal);
+let iconFlecha = `<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    fill="currentColor"
+    class="bi bi-arrow-left-circle-fill"
+    viewBox="0 0 16 16"
+  >
+    <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+  </svg>`;
+
+let iconFoto = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
+  <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+  <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+</svg>`;
 
 function loadIncidents() {
   console.log(alerts);
@@ -177,7 +191,11 @@ function showDetailIncident(dataIncidente, dataUsuario) {
   //console.log("dataUser", JSON.stringify(dataUser));
   document.getElementById('alerts-details-incident').innerHTML = '';
   document.getElementById('alerts-details-incident').innerHTML = `
-  <a href="#" id="btn-ver-lista" class="btn-ver-lista">Volver a Lista de Incidentes</a>
+  
+  <button class="btn-ver-lista" id="btn-ver-lista">
+    <span class="icon-flecha">${iconFlecha}</span>
+  </button>
+
   <ul class="alerts-details__list">
     <li class="alerts-details__item">
       <span class="alerts-details__key alerts-details__title-key"
@@ -250,6 +268,21 @@ function showDetailIncident(dataIncidente, dataUsuario) {
       >${dataUsuario.telefono}</span
     >
   </li>
+
+  <li class="alerts-details__item alerts-details__item-photo">
+    <span class="alerts-details__key alerts-details__photo-key"
+      >FOTO:</span
+    >
+    <a
+            href="./image/robo.jpg"
+            class="alerts-details__valor alerts-details__photo-valor"
+            data-lightbox="myGallery"
+            data-title="Foto enviada por poblador."
+            >Ver Foto</a
+          >
+    </a>
+    <div class="iconFoto">${iconFoto}</div>
+  </li>
 </ul>`;
 }
 
@@ -261,7 +294,32 @@ function getDataUser(uid, data) {
   starCountRef.on('value', snapshot => {
     user = snapshot.val();
     showDetailIncident(data, user);
-    //console.log("getDataUser", user);
+    document.getElementById('alerts-details-incident').appendChild = `
+      <button class="btn-ver-lista" id="btn-ver-lista">
+        <i class="far fa-arrow-alt-circle-left icon-flecha"></i>
+      </button>
+    `;
+    let btnVerLista = document.getElementById('btn-ver-lista');
+
+    /************  INICIO BOTON VER LISTA DE ALERTAS **********************/
+    console.log(btnVerLista);
+    if (btnVerLista != null) {
+      btnVerLista.addEventListener('click', () => {
+        // alerts.classList.toggle('left-none');
+        alerts.classList.add('left-none');
+        sidebar.classList.add('close');
+        // mainContent.classList.toggle('max-w80');
+        alertsDetails.classList.add('d-none');
+        alertsDetails.style.opacity = 1;
+        mapAlerts.classList.add('d-none');
+        tablaUsuarios.classList.add('d-none');
+        tablaIncidencias.classList.add('d-none');
+        imagenPrincipal.classList.add('d-none');
+        leyendaAlertas.classList.remove('d-none');
+        alerts.classList.remove('d-none');
+      });
+    }
+    /**************** FIN BOTON VER LISTA DE ALERTAS **********************/
   });
   //return user;
 }

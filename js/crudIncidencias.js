@@ -1,5 +1,10 @@
 // let alertsDetails = document.querySelector('.alerts-details');
 $(document).ready(function () {
+  /* ********** PROBANDO CODIGO */
+  // Update slide switch highlight
+
+  /* ********** FIN PROBANDO CODIGO */
+
   // Your web app's Firebase configuration
   /*const config = {
     // Your web app's Firebase configuration
