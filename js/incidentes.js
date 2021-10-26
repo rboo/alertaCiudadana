@@ -4,7 +4,7 @@ const key = '123456';
 
 let contActual = 0;
 let cont = 0;
-let cont2 = 0;
+
 let primercont = [];
 let modalNuevoIncidente = document.getElementById('staticBackdrop');
 let btnNuevoIncidente = document.getElementById('btnNuevoIncidente');
@@ -31,7 +31,9 @@ let iconFoto = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" f
 function loadIncidents() {
   console.log(alerts);
   let index = 0;
-  let ind = 0;
+  let contSube = 0;
+  let contBaja = 0;
+
   firebase
     .auth()
     .signInWithEmailAndPassword(user, key)
@@ -47,22 +49,29 @@ function loadIncidents() {
           index++;
           var childData = childSnapshot.val();
           console.log('data', childData);
-          // console.log(arreglo.sort);
           showList(childData, index);
           cont++; //contador de incidencias
-          // primercont[index] = cont;
+          banderaEliminado = null;
         });
         console.log(`El contador actual es de: ${cont}`);
-        contActual = cont;
-        index = 0;
+        console.log(`Este es el contador 2: ${cont2}`);
+        // console.log(banderaEliminado);
+
+        index = 0; //vuelvo el indice  a 0
 
         //condicion para que muestre el modal de alerta de nuevo incidente
-        if (cont2 !== cont) {
+        if (cont2 === cont + 1) {
           mainBody.classList.add('modal-open');
           modalNuevoIncidente.classList.add('show');
           modalNuevoIncidente.style.display = 'block';
         }
+        // if (banderaEliminado === null && cont2 !== cont) {
+        //   mainBody.classList.add('modal-open');
+        //   modalNuevoIncidente.classList.add('show');
+        //   modalNuevoIncidente.style.display = 'block';
+        // }
 
+        cont2 = 1;
         cont = 0; //volver el contador de incidencias a 0 para volver a contar con la actuailzacion
         addMarquer();
       });

@@ -299,6 +299,7 @@ $(document).ready(function () {
     $('#modalAltaEdicion').modal('show');
   });
 
+  /* boton BORRAR */
   $('#tablaUsuarios').on('click', '.btnBorrar', function () {
     filaEliminada = $(this); //captura la fila eliminada para pasarla al event CHILD_REMOVED
     Swal.fire({

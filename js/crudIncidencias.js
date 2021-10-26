@@ -74,13 +74,10 @@ $(document).ready(function () {
         targets: -1,
         defaultContent:
           "<div class='wrapper text-center'><div class='btn-group'><button class='btnDetalle btn btn-warning' data-toggle='tooltip' title='Ver Detalle'>" +
-          iconoDetalle,
-        // +
-        // "</button><button class='btnEditar btn btn-primary' data-toggle='tooltip' title='Editar'>" +
-        // iconoEditar +
-        // "</button><button class='btnBorrar btn btn-danger' data-toggle='tooltip' title='Borrar'>" +
-        // iconoBorrar +
-        // '</button></div></div>',
+          iconoDetalle +
+          "</button><button class='btnBorrar btn btn-danger' data-toggle='tooltip' title='Borrar'>" +
+          iconoBorrar +
+          '</button></div></div>',
       },
     ],
 
@@ -288,302 +285,48 @@ $(document).ready(function () {
     // $('#modalAltaEdicion').modal('show');
   });
 
-  /* INICO PROBANDO CODIGO ********************************************** */
+  /* boton BORRAR */
+  $('#tablaIncidencias').on('click', '.btnBorrar', function () {
+    filaEliminada = $(this); //captura la fila eliminada para pasarla al event CHILD_REMOVED
+    Swal.fire({
+      title: '¿Está seguro de eliminar esta alerta?',
+      text: '¡Está operación no se puede revertir!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Eliminar',
+    }).then(result => {
+      if (result.value) {
+        let fila = $('#tablaIncidencias')
+          .dataTable()
+          .fnGetData($(this).closest('tr'));
+        banderaEliminado = true;
+        cont2 += 10;
+        let id = fila[0]; //capturamos el atributo ID de la fila
+        db.ref(`incidentes/${id}`).remove(); //eliminamos el producto de firebase
+        Swal.fire('¡Eliminado!', 'La alerta ha sido eliminada.', 'success');
+      }
+    });
+  });
+
+  /* FIN boton borrar */
+
   const dbref = firebase.database(); //.ref().child('incidentes');
   const user = 'test@gmail.com';
   const key = '123456';
 
-  // function loadIncidents() {
-  //   console.log(alerts);
-  //   let index = 0;
-  //   let ind = 0;
-  //   firebase
-  //     .auth()
-  //     .signInWithEmailAndPassword(user, key)
-  //     .then(() => {
-  //       // var starCountRef = dbref.ref().child('incidentes');
-  //       // console.log(starCountRef);
-  //       // starCountRef.on('value', snapshot => {
-  //       //   snapshot.forEach(function (childSnapshot) {
-  //       //     cont2++; //contador de incidencias
-  //       //   });
-  //       //   console.log('segundo contador: ' + cont2);
-  //       // });
-  //     })
-  //     .then(userCredential => {
-  //       // Signed in
-  //       // var user = userCredential.user;
-  //       // ...
-  //       // var starCountRef = dbref.ref().child('incidentes');
-  //       // starCountRef.on('value', snapshot => {
-  //       //   document.getElementById('alerts__list').innerHTML = '';
-  //       //   snapshot.forEach(function (childSnapshot) {
-  //       //     index++;
-  //       //     var childData = childSnapshot.val();
-  //       //     console.log('data', childData);
-  //       //     // console.log(arreglo.sort);
-  //       //     showList(childData, index);
-  //       //     cont++; //contador de incidencias
-  //       //     // primercont[index] = cont;
-  //       //   });
-  //       //   console.log(`El contador actual es de: ${cont}`);
-  //       //   contActual = cont;
-  //       //   /* probando codigo */
-  //       //   // x = {
-  //       //   //   aInternal: contActual,
-  //       //   //   aListener: function (val) {},
-  //       //   //   set a(val) {
-  //       //   //     this.aInternal = val;
-  //       //   //     this.aListener(val);
-  //       //   //   },
-  //       //   //   get a() {
-  //       //   //     return this.aInternal;
-  //       //   //   },
-  //       //   //   registerListener: function (listener) {
-  //       //   //     this.aListener = listener;
-  //       //   //   },
-  //       //   // };
-  //       //   // x.registerListener(function (val) {
-  //       //   //   alert('Someone changed the value of x.a to ' + val);
-  //       //   // });
-  //       //   // x.a = contActual;
-  //       //   // console.log(object);
-  //       //   /* fin probando codigo */
-  //       //   // console.log(childData.get.count());
-  //       //   // primercont.forEach(el => {
-  //       //   //   console.log(el);
-  //       //   // });
-  //       //   if (cont2 !== cont) {
-  //       //     mainBody.classList.add('modal-open');
-  //       //     modalNuevoIncidente.classList.add('show');
-  //       //     modalNuevoIncidente.style.display = 'block';
-  //       //   }
-  //       //   // if (cont2 - cont > cont) {
-  //       //   //   console.log('se elimino un elemento de incidencias');
-  //       //   //   // break;
-  //       //   // }
-  //       //   // console.log(`El contador actual es de: ${contActual}`);
-  //       //   // console.log(`este es el array contador ${primercont[0]}`);
-  //       //   // if (cont2 !== cont) {
-  //       //   cont = 0; //volver el contador de incidencias a 0 para volver a contar con la actuailzacion
-  //       // });
-  //     })
-
-  //     // .then(() => {
-  //     //   if (change.after.exists()) {
-  //     //     console.log(cont2);
-  //     //     console.log(cont);
-  //     //     mainBody.classList.add('modal-open');
-  //     //     modalNuevoIncidente.classList.add('show');
-  //     //     modalNuevoIncidente.style.display = 'block';
-  //     //   }
-  //     // })
-  //     .catch(error => {
-  //       var errorCode = error.code;
-  //       var errorMessage = error.message;
-  //       console.error('error ' + errorCode + ' ' + errorMessage);
-  //     });
-  // }
-
-  /*  function loadIncidentDetail(uid) {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(user, key)
-      .then(userCredential => {
-        var starCountRef = dbref.ref().child('incidentes').child(uid);
-        starCountRef.on('value', snapshot => {
-          let dataIncidente = snapshot.val();
-          console.log(
-            'data',
-            dataIncidente.latitud + '-' + dataIncidente.longitud,
-          );
-
-          //showDetailIncident(dataIncidente);
-          getDataUser(dataIncidente.usuario, dataIncidente);
-
-          destinationLocation = new google.maps.LatLng(
-            dataIncidente.latitud,
-            dataIncidente.longitud,
-          );
-          map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 12,
-            center: destinationLocation,
-          });
-
-          const infowindow = new google.maps.InfoWindow({
-            content: dataIncidente.titulo,
-          });
-
-          //generateMarker({ position: destinationLocation, title: 'Destination' })
-          const marker = new google.maps.Marker({
-            position: destinationLocation,
-            map,
-            title: 'Uluru (Ayers Rock)',
-          });
-
-          marker.addListener('click', () => {
-            infowindow.open({
-              anchor: marker,
-              map,
-              shouldFocus: false,
-            });
-          });
-        });
-      })
-      .catch(error => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        console.error('error ' + errorCode + ' ' + errorMessage);
-      });
-  }
- */
-  /*  function generateMarker({ position, title }) {
-    return new google.maps.Marker({
-      position,
-      title,
-      map,
-      animation: google.maps.Animation.DROP,
-    });
-  } */
-
-  /* function showDetailIncident(dataIncidente, dataUsuario) {
-    //let dataUser = getDataUser(data.usuario);
-    //console.log("dataUser", JSON.stringify(dataUser));
-    document.getElementById('alerts-details-incident').innerHTML = '';
-    document.getElementById('alerts-details-incident').innerHTML = `
-<ul class="alerts-details__list">
-  <li class="alerts-details__item">
-    <span class="alerts-details__key alerts-details__title-key"
-      >TITULO INCIDENTE:</span
-    >
-    <span class="alerts-details__valor alerts-details__title-valor"
-      >${dataIncidente.titulo}</span
-    >
-  </li>
-
-  <li class="alerts-details__item">
-    <span class="alerts-details__key alerts-details__description-key"
-      >DESCRIPCIÓN:</span
-    >
-    <span
-      class="alerts-details__valor alerts-details__description-valor"
-      >${dataIncidente.descripcion}</span
-    >
-  </li>
-
-  <li class="alerts-details__item">
-    <span class="alerts-details__key alerts-details__date-key"
-      >FECHA:</span
-    >
-    <span class="alerts-details__valor alerts-details__date-valor"
-      >${dataIncidente.fecha}
-    </span>
-  </li>
-
-  <li class="alerts-details__item">
-    <span class="alerts-details__key alerts-details__hour-key"
-      >HORA:</span
-    >
-    <span class="alerts-details__valor alerts-details__hour-valor"
-      >${dataIncidente.hora}</span
-    >
-  </li>
-
-  <li class="alerts-details__item">
-    <span class="alerts-details__key alerts-details__name-key"
-      >NOMBRE:</span
-    >
-    <span class="alerts-details__valor alerts-details__name-valor"
-      >${dataUsuario.nombres}</span
-    >
-  </li>
-
-  <li class="alerts-details__item">
-    <span class="alerts-details__key alerts-details__lastname-key"
-      >APELLIDO:</span
-    >
-    <span class="alerts-details__valor alerts-details__lastname-valor"
-      >${dataUsuario.apellidos}</span
-    >
-  </li>
-
-  <li class="alerts-details__item">
-    <span class="alerts-details__key alerts-details__dni-key"
-      >DNI:</span
-    >
-    <span class="alerts-details__valor alerts-details__dni-valor"
-      >${dataUsuario.numerodocumento}</span
-    >
-  </li>
-
-  <li class="alerts-details__item">
-    <span class="alerts-details__key alerts-details__phone-key"
-      >TELEFONO:</span
-    >
-    <span class="alerts-details__valor alerts-details__phone-valor"
-      >${dataUsuario.telefono}</span
-    >
-  </li>
-</ul>`;
-  }
- */
-  /*  function getDataUser(uid, data) {
-    //console.log("data uid", uid);
-    let user;
-
-    var starCountRef = firebase.database().ref('usuarios').child(uid);
-    starCountRef.on('value', snapshot => {
-      user = snapshot.val();
-      showDetailIncident(data, user);
-      //console.log("getDataUser", user);
-    });
-    //return user;
-  } */
-
-  // function getDataUser(uid, data) {
-  //   //console.log("data uid", uid);
-  //   // let user;
-
-  //   var starCountRef = firebase.database().ref('usuarios').child(uid);
-  //   starCountRef.on('value', snapshot => {
-  //     user = snapshot.val();
-  //     showDetailIncident(data, user);
-  //     //console.log("getDataUser", user);
-  //   });
-  //   //return user;
-  // }
-
-  /* FIN PROBANDO CODIGO **************************************** */
-
   //botom mostrar detalle
   $('#tablaIncidencias').on('click', '.btnDetalle', function () {
-    filaSeleccionada = $(this); //captura la fila eliminada para pasarla al event CHILD_REMOVED
-    // loadIncidents();
+    filaSeleccionada = $(this);
     tablaIncidencias.classList.add('d-none');
     alertsDetails.classList.remove('d-none');
     mapAlerts.classList.remove('d-none');
-    // initMap();
-    // showDetailIncident();
-    // Swal.fire({
-    //   title: '¿Está seguro de eliminar la incidencia?',
-    //   text: '¡Está operación no se puede revertir!',
-    //   icon: 'warning',
-    //   showCancelButton: true,
-    //   confirmButtonColor: '#d33',
-    //   cancelButtonColor: '#3085d6',
-    //   confirmButtonText: 'Eliminar',
-    // }).then(result => {
-    //   if (result.value) {
     let fila = $('#tablaIncidencias')
       .dataTable()
       .fnGetData($(this).closest('tr'));
     let id = fila[0]; //capturamos el atributo ID de la fila
     loadIncidentDetail(id);
-
-    // db.ref(`incidentes/${id}`).remove(); //eliminamos el producto de firebase
-    // Swal.fire('¡Eliminado!', 'La incidencia ha sido eliminada.', 'success');
-    //   }
-    // });
   });
 });
 

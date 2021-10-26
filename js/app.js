@@ -19,6 +19,8 @@ let graficasContainer = document.querySelector('.graficasContainer'); //no se es
 let graficaIncidencias = document.querySelector('.graficaIncidencias');
 let imagenPrincipal = document.querySelector('.img-main-dashboard');
 let leyendaAlertas = document.querySelector('#leyenda-alertas');
+let banderaEliminado = null;
+let cont2 = 0;
 
 /* ********** FIN DECLARACION DE VARIABLES ************* */
 
