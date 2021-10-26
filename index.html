@@ -41,6 +41,140 @@
   </head>
   <body id="main-body">
     <div class="main-container">
+      <!------- Inicio Modal crear y editar usuarios ----------------->
+      <div
+        id="modalAltaEdicion"
+        class="modal fade"
+        data-backdrop="static"
+        data-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header bg-primary text-light">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Ingreso de Datos de Usuarios
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form>
+              <div class="modal-body">
+                <input id="id" type="hidden" />
+                <!-- ID que vamos a recibir de firebase -->
+                <div class="form-group">
+                  <label>DNI</label>
+                  <input
+                    id="dni"
+                    type="text"
+                    class="form-control"
+                    required
+                    maxlength="8"
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Nombres</label>
+                  <input
+                    id="nombres"
+                    type="text"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Apellidos</label>
+                  <input
+                    id="apellidos"
+                    type="text"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Correo Electrónico</label>
+                  <input id="email" type="text" class="form-control" required />
+                </div>
+                <div class="form-group">
+                  <label>Contraseña</label>
+                  <input
+                    id="password"
+                    type="password"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Número de Teléfono</label>
+                  <input
+                    id="telefono"
+                    type="text"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Dirección</label>
+                  <input
+                    id="direccion"
+                    type="text"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Fecha de Nacimiento</label>
+                  <input
+                    id="fecnac"
+                    type="date"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="sexo">Sexo</label>
+                  <br />
+                  <select name="sexo" id="sexo">
+                    <option value="Masculino" selected>Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="tipo-usuario">Tipo de Usuario</label>
+                  <br />
+                  <select name="tipo-usuario" id="tipo-usuario">
+                    <option value="1">Agente serenazgo</option>
+                    <option value="2" selected>Ciudadano</option>
+                  </select>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-warning"
+                  data-dismiss="modal"
+                  tabindex="2"
+                >
+                  Cancelar
+                </button>
+                <button type="submit" id="btnGuardar" class="btn btn-success">
+                  Guardar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!----------------- Fin Modal crear y editar usuarios----------------->
+
       <div class="sidebar close">
         <div class="logo-details">
           <i class="bx bx-tada bxs-bell-ring"></i>
@@ -401,9 +535,10 @@
               <div class="col-lg-12">
                 <button
                   id="btnNuevo"
-                  class="btn btn-info"
-                  data-toggle="tooltip"
-                  title="Nuevo Usuario"
+                  class="btn btn-primary"
+                  type="button"
+                  data-toggle="modal"
+                  data-target="#modalAltaEdicion"
                 >
                   <svg
                     class="bi bi-plus-circle-fill"
@@ -420,150 +555,7 @@
                   </svg>
                   Nuevo Usuario
                 </button>
-                <!------- Inicio Modal ----------------->
-                <div
-                  id="modalAltaEdicion"
-                  class="modal fade modalUsuarios"
-                  tabindex="-1"
-                  role="dialog"
-                  aria-labelledby="exampleModalLabel"
-                  aria-hidden="true"
-                >
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header bg-primary text-light">
-                        <h5 class="modal-title" id="exampleModalLabel">
-                          Ingreso de Datos de Usuarios
-                        </h5>
-                        <button
-                          type="button"
-                          class="close"
-                          data-dismiss="modal"
-                          aria-label="Close"
-                        >
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <form>
-                        <div class="modal-body">
-                          <input id="id" type="hidden" />
-                          <!-- ID que vamos a recibir de firebase -->
-                          <div class="form-group">
-                            <label>DNI</label>
-                            <input
-                              id="dni"
-                              type="text"
-                              class="form-control"
-                              required
-                              maxlength="8"
-                            />
-                          </div>
-                          <div class="form-group">
-                            <label>Nombres</label>
-                            <input
-                              id="nombres"
-                              type="text"
-                              class="form-control"
-                              required
-                            />
-                          </div>
-                          <div class="form-group">
-                            <label>Apellidos</label>
-                            <input
-                              id="apellidos"
-                              type="text"
-                              class="form-control"
-                              required
-                            />
-                          </div>
-                          <div class="form-group">
-                            <label>Correo Electrónico</label>
-                            <input
-                              id="email"
-                              type="text"
-                              class="form-control"
-                              required
-                            />
-                          </div>
-                          <div class="form-group">
-                            <label>Contraseña</label>
-                            <input
-                              id="password"
-                              type="password"
-                              class="form-control"
-                              required
-                            />
-                          </div>
-                          <div class="form-group">
-                            <label>Número de Teléfono</label>
-                            <input
-                              id="telefono"
-                              type="text"
-                              class="form-control"
-                              required
-                            />
-                          </div>
-                          <div class="form-group">
-                            <label>Dirección</label>
-                            <input
-                              id="direccion"
-                              type="text"
-                              class="form-control"
-                              required
-                            />
-                          </div>
-                          <div class="form-group">
-                            <label>Fecha de Nacimiento</label>
-                            <input
-                              id="fecnac"
-                              type="date"
-                              class="form-control"
-                              required
-                            />
-                          </div>
-                          <div class="form-group">
-                            <label for="sexo">Sexo</label>
-                            <br />
-                            <select name="sexo" id="sexo">
-                              <option value="Masculino" selected>
-                                Masculino
-                              </option>
-                              <option value="Femenino">Femenino</option>
-                            </select>
-                          </div>
-
-                          <div class="form-group">
-                            <label for="tipo-usuario">Tipo de Usuario</label>
-                            <br />
-                            <select name="tipo-usuario" id="tipo-usuario">
-                              <option value="1">Agente serenazgo</option>
-                              <option value="2" selected>Ciudadano</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button
-                            type="button"
-                            class="btn btn-secondary"
-                            data-dismiss="modal"
-                            tabindex="2"
-                          >
-                            Cancelar
-                          </button>
-                          <button
-                            type="submit"
-                            id="btnGuardar"
-                            class="btn btn-primary"
-                            translate="1"
-                          >
-                            Guardar
-                          </button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-                <!----------------- Fin Modal ----------------->
+                <!-- aqui va el modalllllllllllllll -->
                 <!-- diseño de la tabla -->
                 <!-- <table id="tablaProductos" class="table table-bordered"> -->
                 <table

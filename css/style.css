@@ -959,3 +959,6 @@ animate__pulse
   color: tomato;
   font-weight: 700;
 }
+
+.modal-bacldrop.fade.show {
+}
