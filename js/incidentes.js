@@ -198,6 +198,7 @@ function generateMarker({ position, title }) {
 function showDetailIncident(dataIncidente, dataUsuario) {
   //let dataUser = getDataUser(data.usuario);
   //console.log("dataUser", JSON.stringify(dataUser));
+  console.log("nameFile",dataUsuario.imagen)
   document.getElementById('alerts-details-incident').innerHTML = '';
   document.getElementById('alerts-details-incident').innerHTML = `
   
@@ -287,12 +288,13 @@ function showDetailIncident(dataIncidente, dataUsuario) {
             class="alerts-details__valor alerts-details__photo-valor"
             data-lightbox="myGallery"
             data-title="Foto enviada por poblador."
-            >Ver Foto</a
+            id="myGallery">Ver Foto</a
           >
     </a>
     <div class="iconFoto">${iconFoto}</div>
   </li>
 </ul>`;
+  getImage(dataIncidente.imagen)
 }
 
 function getDataUser(uid, data) {
@@ -331,4 +333,24 @@ function getDataUser(uid, data) {
     /**************** FIN BOTON VER LISTA DE ALERTAS **********************/
   });
   //return user;
+}
+
+function getImage(nameFile) {
+  // Create a reference with an initial file path and name
+  var storage = firebase.storage();
+  var storageRef = storage.ref(nameFile);
+  storageRef.getDownloadURL().then(function (url) {
+    var xhr = new XMLHttpRequest();
+    xhr.responseType = 'blob';
+    xhr.onload = function (event) {
+      var blob = xhr.response;
+    };
+    xhr.open('GET', url);
+    xhr.send();
+   
+    var img = document.getElementById('myGallery');
+    img.setAttribute("href", url);
+  }).catch(function (error) {
+    console.error("Error", error);
+  });
 }
