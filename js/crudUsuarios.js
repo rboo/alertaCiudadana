@@ -240,13 +240,10 @@ $(document).ready(function () {
     let idFirebase = id;
 
     if (bandCorreDuplicado === true && idFirebase == '') {
-      $('#modalEmailRepetido').modal('show');
-
-      /* funcion para no perder la clase modal open de los modales */
-      $(document).on('hidden.bs.modal', function (event) {
-        if ($('.modal:visible').length) {
-          $('body').addClass('modal-open');
-        }
+      Swal.fire({
+        icon: 'error',
+        title: 'Atención...',
+        text: 'Email ya existente en la base de datos, registre al usuario con un Email diferente.',
       });
       return (bandCorreDuplicado = false);
     }
@@ -274,13 +271,21 @@ $(document).ready(function () {
       coleccionUsuarios.update(actualizacionData);
       idFirebase = coleccionUsuarios.push().key;
       id = '';
-      // $('form').trigger('reset'); //limpiamos los campos del formulario
-      // $('#modalAltaEdicion').modal('hide');
+      $('form').trigger('reset'); //limpiamos los campos del formulario
       $('#modalAltaEdicion').modal('hide');
-      $('#modalAltaEdicion').on('hidden.bs.modal', function (event) {
-        const $formulario = $('#modalAltaEdicion').find('form');
-        $formulario[0].reset();
+
+      /* modal de aviso de que se actualizó usuario correctamente */
+      Swal.fire({
+        icon: 'success',
+        title: 'Datos de usuario actualizados correctamente',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown',
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp',
+        },
       });
+
       return (bandCorreDuplicado = false);
     }
 
@@ -318,15 +323,23 @@ $(document).ready(function () {
             actualizacionData[`/${idFirebase}`] = data;
             coleccionUsuarios.update(actualizacionData);
             id = '';
-            // $('form').trigger('reset'); //limpiamos los campos del formulario
+            $('form').trigger('reset'); //limpiamos los campos del formulario
             $('#modalAltaEdicion').modal('hide');
-            $('#modalAltaEdicion').on('hidden.bs.modal', function (event) {
-              const $formulario = $('#modalAltaEdicion').find('form');
-              $formulario[0].reset();
-            });
-            /* fin probndo codigo */
 
             console.info(`Usuario creado correctamente ${user}`);
+
+            /* modal de aviso de que se actualizó usuario correctamente */
+            Swal.fire({
+              icon: 'success',
+              title: 'Datos de usuario actualizados correctamente',
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown',
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp',
+              },
+            });
+
             return (bandCorreDuplicado = false);
           })
           .catch(error => {
