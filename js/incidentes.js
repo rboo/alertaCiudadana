@@ -82,8 +82,6 @@ function loadIncidents() {
         $.each(oTable.fnGetData(), function (i, row) {
           arregloConEmailUsurios.push(row[4]);
         });
-
-        console.log(arregloConEmailUsurios);
         /*fin probando codigo *********************************/
       });
     })

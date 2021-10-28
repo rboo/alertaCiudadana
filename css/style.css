@@ -681,6 +681,7 @@ animate__pulse
 
 .login__title {
   font-weight: 200;
+  margin: 3rem 0;
 }
 
 .login__data {
@@ -717,7 +718,7 @@ animate__pulse
 }
 
 .input-fill input:focus + .input-label {
-  top: -16px;
+  top: -22px;
   margin-bottom: 3rem;
   color: #137633;
 }
@@ -728,7 +729,7 @@ animate__pulse
 
 .input-label {
   position: absolute;
-  top: 0px;
+  top: -10px;
   left: 28px;
   line-height: 147.6%;
   color: #848f9a;
