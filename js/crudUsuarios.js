@@ -18,6 +18,9 @@ $(document).ready(function () {
 
   var filaEliminada; //para capturara la fila eliminada
   var filaEditada; //para capturara la fila editada o actualizada
+  let bandCorreDuplicado = false;
+
+  console.log(arregloConEmailUsurios);
 
   //creamos constantes para los iconos editar y borrar
   const iconoEditar =
@@ -218,34 +221,133 @@ $(document).ready(function () {
     let sexo = $.trim($('#sexo').val());
     let host = '1'; //1 -> web
 
-    let idFirebase = id;
-    if (idFirebase == '') {
-      createUser(email, password);
-      idFirebase = coleccionUsuarios.push().key;
+    /* inicio probando codigo***************************************************** */
+
+    //validando que el DNI no tengo menos de 8 caracteres
+    if (dni.length < 8) {
+      inputDni.value = '';
+      return (dni = '');
     }
 
-    data = {
-      numerodocumento: dni,
-      nombres: nombres,
-      apellidos: apellidos,
-      correo: email,
-      clave: password,
-      telefono: telefono,
-      direccion: direccion,
-      fechanac: fecnac,
-      imagen: imagen,
-      sexo: sexo,
-      tipoacceso: tipoAcceso,
-      host: host,
-    };
+    //validando que el Email no exista en la base de datos
+    arregloConEmailUsurios.forEach(element => {
+      if (email === element) {
+        console.log('Si hay un email repetido');
+        bandCorreDuplicado = true;
+      }
+    });
 
-    actualizacionData = {};
-    actualizacionData[`/${idFirebase}`] = data;
+    let idFirebase = id;
 
-    coleccionUsuarios.update(actualizacionData);
-    id = '';
-    $('form').trigger('reset'); //limpiamos los campos del formulario
-    $('#modalAltaEdicion').modal('hide');
+    if (bandCorreDuplicado === true && idFirebase == '') {
+      $('#modalEmailRepetido').modal('show');
+
+      /* funcion para no perder la clase modal open de los modales */
+      $(document).on('hidden.bs.modal', function (event) {
+        if ($('.modal:visible').length) {
+          $('body').addClass('modal-open');
+        }
+      });
+      return (bandCorreDuplicado = false);
+    }
+
+    //esto se ejecuta para las ACTUALIZACIONES de informacion de USUARIOS
+    if (bandCorreDuplicado === true && idFirebase !== '') {
+      data = {
+        numerodocumento: dni,
+        nombres: nombres,
+        apellidos: apellidos,
+        correo: email,
+        clave: password,
+        telefono: telefono,
+        direccion: direccion,
+        fechanac: fecnac,
+        imagen: imagen,
+        sexo: sexo,
+        tipoacceso: tipoAcceso,
+        host: host,
+      };
+
+      actualizacionData = {};
+      actualizacionData[`/${idFirebase}`] = data;
+      // createUser(email, password);
+      coleccionUsuarios.update(actualizacionData);
+      idFirebase = coleccionUsuarios.push().key;
+      id = '';
+      // $('form').trigger('reset'); //limpiamos los campos del formulario
+      // $('#modalAltaEdicion').modal('hide');
+      $('#modalAltaEdicion').modal('hide');
+      $('#modalAltaEdicion').on('hidden.bs.modal', function (event) {
+        const $formulario = $('#modalAltaEdicion').find('form');
+        $formulario[0].reset();
+      });
+      return (bandCorreDuplicado = false);
+    }
+
+    // si NO existe email de usuario anteorior pasa a CREAR USUARIO
+    if (bandCorreDuplicado === false && idFirebase === '') {
+      // idFirebase = coleccionUsuarios.push().key;
+      createUser(email, password);
+      function createUser(email, password) {
+        firebase
+          .auth()
+          .createUserWithEmailAndPassword(email, password)
+          .then(userCredential => {
+            // Signed in
+            var user = userCredential.user;
+
+            /* probndo codigo */
+            data = {
+              numerodocumento: dni,
+              nombres: nombres,
+              apellidos: apellidos,
+              correo: email,
+              clave: password,
+              telefono: telefono,
+              direccion: direccion,
+              fechanac: fecnac,
+              imagen: imagen,
+              sexo: sexo,
+              tipoacceso: tipoAcceso,
+              host: host,
+            };
+
+            // createUser(email, password);
+            idFirebase = coleccionUsuarios.push().key;
+            actualizacionData = {};
+            actualizacionData[`/${idFirebase}`] = data;
+            coleccionUsuarios.update(actualizacionData);
+            id = '';
+            // $('form').trigger('reset'); //limpiamos los campos del formulario
+            $('#modalAltaEdicion').modal('hide');
+            $('#modalAltaEdicion').on('hidden.bs.modal', function (event) {
+              const $formulario = $('#modalAltaEdicion').find('form');
+              $formulario[0].reset();
+            });
+            /* fin probndo codigo */
+
+            console.info(`Usuario creado correctamente ${user}`);
+            return (bandCorreDuplicado = false);
+          })
+          .catch(error => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            alert(`Error ${errorCode} - ${errorMessage}`);
+            /* probando codigo */
+            $('#modalEmailRepetido').modal('show');
+
+            /* funcion para no perder la clase modal open de los modales */
+            $(document).on('hidden.bs.modal', function (event) {
+              if ($('.modal:visible').length) {
+                $('body').addClass('modal-open');
+              }
+            });
+            return (bandCorreDuplicado = false);
+            /* fin probando codigo */
+            // return (bandCorreDuplicado = false);
+          });
+      }
+    }
   });
 
   //Botones
@@ -336,7 +438,6 @@ function createUser(email, password) {
     .catch(error => {
       var errorCode = error.code;
       var errorMessage = error.message;
-
-      alert(`Error ${errorCode} - ${errorMessage}`);
+      return alert(`Error ${errorCode} - ${errorMessage}`);
     });
 }

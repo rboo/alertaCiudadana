@@ -12,6 +12,7 @@ let btnActivarModal = document.querySelector('.btn-activar-modal');
 let mainBody = document.getElementById('main-body');
 let btnCloseModal = document.querySelectorAll('.btn-close-modal');
 let containerModal2 = document.querySelector('.container-modal2');
+let arregloConEmailUsurios = [];
 let iconFlecha = `<svg
     xmlns="http://www.w3.org/2000/svg"
     width="16"
@@ -61,7 +62,7 @@ function loadIncidents() {
 
         //condicion para que muestre el modal de alerta de nuevo incidente
         if (cont2 === cont + 1) {
-          mainBody.classList.add('modal-open');
+          // mainBody.classList.add('modal-open');
           modalNuevoIncidente.classList.add('show');
           modalNuevoIncidente.style.display = 'block';
         }
@@ -74,6 +75,16 @@ function loadIncidents() {
         cont2 = 1;
         cont = 0; //volver el contador de incidencias a 0 para volver a contar con la actuailzacion
         addMarquer();
+
+        /* probando codigo *********************************/
+        oTable = $('#tablaUsuarios').dataTable();
+
+        $.each(oTable.fnGetData(), function (i, row) {
+          arregloConEmailUsurios.push(row[4]);
+        });
+
+        console.log(arregloConEmailUsurios);
+        /*fin probando codigo *********************************/
       });
     })
     .catch(error => {
@@ -86,7 +97,7 @@ function loadIncidents() {
 //Configuracion de boton CERRAR de modal aviso nuevo incidente
 btnCloseModal.forEach(el => {
   el.addEventListener('click', () => {
-    mainBody.classList.remove('modal-open');
+    // mainBody.classList.remove('modal-open');
     modalNuevoIncidente.style.display = '';
 
     modalNuevoIncidente.classList.remove('show');

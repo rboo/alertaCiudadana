@@ -19,6 +19,7 @@ let graficasContainer = document.querySelector('.graficasContainer'); //no se es
 let graficaIncidencias = document.querySelector('.graficaIncidencias');
 let imagenPrincipal = document.querySelector('.img-main-dashboard');
 let leyendaAlertas = document.querySelector('#leyenda-alertas');
+let inputDni = document.getElementById('dni');
 let banderaEliminado = null;
 let cont2 = 0;
 
@@ -181,6 +182,24 @@ if (alertHistory != null) {
 }
 
 /**************** FIN BOTON HISTORIAL ALERTAS **********************/
+
+/* ************ VALIDANDO INPUT DNI PARA QUE SOLO SEAN NUMEROS Y MAXIMO 8 CARACTERES ************************** */
+function maxLengthCheck(object) {
+  if (object.value.length > object.max.length)
+    object.value = object.value.slice(0, object.max.length);
+}
+
+function isNumeric(evt) {
+  var theEvent = evt || window.event;
+  var key = theEvent.keyCode || theEvent.which;
+  key = String.fromCharCode(key);
+  var regex = /[0-9]|\./;
+  if (!regex.test(key)) {
+    theEvent.returnValue = false;
+    if (theEvent.preventDefault) theEvent.preventDefault();
+  }
+}
+/* ************ FIN VALIDANDO INPUT DNI PARA QUE SOLO SEAN NUMEROS Y MAXIMO 8 CARACTERES ************************** */
 
 // let botonRecargar = document.getElementById('boton-recargar');
 // botonRecargar.addEventListener('click', () => {

@@ -516,6 +516,41 @@ animate__pulse
   text-align: justify;
 }
 
+/* li[class~="alert-type-Asalto"]{ background-color:red; } */
+.alerts__list-items {
+  background-color: #ffd866;
+}
+
+.alert-type-Asalto {
+  background-color: #a9dc76;
+}
+
+.alert-type-Sospechoso {
+  background-color: #78dce8;
+}
+
+.alert-type-Nuevo {
+  background-color: tomato;
+}
+
+.alerts-details__item-photo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.alerts-details__photo-valor {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  color: black;
+}
+
+.alerts-details__photo-valor:hover {
+  text-decoration: none;
+  color: tomato;
+  font-weight: 700;
+}
+
 /* *** Inicio estilos de boton detalles de alertas para volver a la lista de alertas *** */
 .btn-ver-lista {
   /* font-family: inherit; */
@@ -924,38 +959,19 @@ animate__pulse
   /* padding-bottom: ; */
 }
 
-/* li[class~="alert-type-Asalto"]{ background-color:red; } */
-.alerts__list-items {
-  background-color: #ffd866;
-}
-
-.alert-type-Asalto {
-  background-color: #a9dc76;
-}
-
-.alert-type-Sospechoso {
-  background-color: #78dce8;
-}
-
-.alert-type-Nuevo {
-  background-color: tomato;
-}
-
 /* probando codigo */
-.alerts-details__item-photo {
+.modal-email-repetido {
+  width: 60vw;
+  right: 29%;
+  height: 56vh;
+}
+
+.modal-email-repetido .modal-body {
   display: flex;
   align-items: center;
-  margin-bottom: 0;
 }
 
-.alerts-details__photo-valor {
-  margin-left: 1rem;
-  margin-right: 1rem;
-  color: black;
-}
-
-.alerts-details__photo-valor:hover {
-  text-decoration: none;
-  color: tomato;
-  font-weight: 700;
+.modal-email-repetido .modal-body h2 {
+  line-height: 1.3;
+  text-align: justify;
 }
