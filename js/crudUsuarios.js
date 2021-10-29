@@ -242,8 +242,8 @@ $(document).ready(function () {
     if (bandCorreDuplicado === true && idFirebase == '') {
       Swal.fire({
         icon: 'error',
-        title: 'Atención...',
-        text: 'Email ya existente en la base de datos, registre al usuario con un Email diferente.',
+        title: 'ATENCIÓN...',
+        text: 'Usted esta intentando registrar un usuario con un correo ya existente por favor intente el registro con un nuevo correo, Gracias.',
       });
       return (bandCorreDuplicado = false);
     }

@@ -183,7 +183,7 @@ if (alertHistory != null) {
 
 /**************** FIN BOTON HISTORIAL ALERTAS **********************/
 
-/* ************ VALIDANDO INPUT DNI PARA QUE SOLO SEAN NUMEROS Y MAXIMO 8 CARACTERES ************************** */
+/* ************ VALIDANDO INPUT PARA QUE SOLO SEAN NUMEROS Y MAXIMO 8 CARACTERES ************************** */
 function maxLengthCheck(object) {
   if (object.value.length > object.max.length)
     object.value = object.value.slice(0, object.max.length);
@@ -199,7 +199,7 @@ function isNumeric(evt) {
     if (theEvent.preventDefault) theEvent.preventDefault();
   }
 }
-/* ************ FIN VALIDANDO INPUT DNI PARA QUE SOLO SEAN NUMEROS Y MAXIMO 8 CARACTERES ************************** */
+/* ************ FIN VALIDANDO INPUT PARA QUE SOLO SEAN NUMEROS Y MAXIMO 8 CARACTERES ************************** */
 
 // let botonRecargar = document.getElementById('boton-recargar');
 // botonRecargar.addEventListener('click', () => {

@@ -124,9 +124,10 @@
                   <label>Número de Teléfono</label>
                   <input
                     id="telefono"
-                    size="9"
+                    maxlength="9"
                     type="text"
                     class="form-control"
+                    onkeypress="return isNumeric(event)"
                     required
                   />
                 </div>
@@ -184,53 +185,6 @@
         </div>
       </div>
       <!----------------- Fin Modal crear y editar usuarios----------------->
-
-      <!-- ------------------ Inicio de MODAL aviso de EMAIL repetido (ya existente) -------------- -->
-
-      <div
-        class="modal fade"
-        id="modalEmailRepetido"
-        data-backdrop="static"
-        data-keyboard="false"
-        tabindex="-1"
-        aria-labelledby="staticBackdropLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content modal-email-repetido">
-            <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">
-                Error E-mail Repetido
-              </h5>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <h2>
-                ATENCIÓN: Usted esta intentando registrar un usuario con un
-                E-mail ya existente por favor intente el registro con un nuevo
-                E-mail, Gracias.
-              </h2>
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-primary"
-                data-dismiss="modal"
-              >
-                Entendido
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- ------------------ Fin de MODAL aviso de EMAIL repetido (ya existente) -------------- -->
 
       <div class="sidebar close">
         <div class="logo-details">
