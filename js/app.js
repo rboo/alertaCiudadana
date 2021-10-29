@@ -20,6 +20,7 @@ let graficaIncidencias = document.querySelector('.graficaIncidencias');
 let imagenPrincipal = document.querySelector('.img-main-dashboard');
 let leyendaAlertas = document.querySelector('#leyenda-alertas');
 let inputDni = document.getElementById('dni');
+
 let banderaEliminado = null;
 let cont2 = 0;
 

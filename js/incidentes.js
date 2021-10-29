@@ -45,12 +45,22 @@ function loadIncidents() {
       var starCountRef = dbref.ref().child('incidentes');
       starCountRef.on('value', snapshot => {
         document.getElementById('alerts__list').innerHTML = '';
+        var list = [];
         snapshot.forEach(function (childSnapshot) {
+          list.push(childSnapshot.val());
+        });
+        debugger;
+        list.sort(function (a, b) {
+          var dat1 = new Date(formatDate(a.fecha, a.hora));
+          var dat2 = new Date(formatDate(b.fecha, b.hora));
+          return dat2.getTime() - dat1.getTime();
+        });
+        list.forEach(a => {
           cont2++;
           index++;
-          var childData = childSnapshot.val();
-          console.log('data', childData);
-          showList(childData, index);
+          //var childData = childSnapshot.val();
+          console.log('data', a);
+          showList(a, index);
           cont++; //contador de incidencias
           banderaEliminado = null;
         });
@@ -91,6 +101,13 @@ function loadIncidents() {
       console.error('error ' + errorCode + ' ' + errorMessage);
     });
 }
+function formatDate(date, hour) {
+  var day = date.split('/')[0];
+  var month = date.split('/')[1];
+  var year = date.split('/')[2];
+  let newDate = year + '-' + month + '-' + day + ' ' + hour;
+  return newDate;
+}
 
 //Configuracion de boton CERRAR de modal aviso nuevo incidente
 btnCloseModal.forEach(el => {
@@ -130,7 +147,7 @@ let tConvert = time => {
 // FIN Funcion para convertir el tiempo de 24 a 12 horas
 
 function showList(data, index) {
-  let hour = tConvert(data.hora);
+  let hour = tConvert(data.hora); //esto convierte la hora a formato
   document.getElementById(
     'alerts__list',
   ).innerHTML += `<li class="alerts__list-items alert-type-${data.titulo}">

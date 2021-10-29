@@ -18,8 +18,7 @@ $(document).ready(function () {
 
   var filaEliminada; //para capturara la fila eliminada
   var filaEditada; //para capturara la fila editada o actualizada
-  let bandCorreDuplicado = false;
-
+  let bandCorreDuplicado = false; //esta variable se utiliza en formulario de usuarios
   console.log(arregloConEmailUsurios);
 
   //creamos constantes para los iconos editar y borrar
@@ -221,8 +220,6 @@ $(document).ready(function () {
     let sexo = $.trim($('#sexo').val());
     let host = '1'; //1 -> web
 
-    /* inicio probando codigo***************************************************** */
-
     //validando que el DNI no tengo menos de 8 caracteres
     if (dni.length < 8) {
       Swal.fire({
@@ -236,8 +233,12 @@ $(document).ready(function () {
     //validando que el Email no exista en la base de datos
     arregloConEmailUsurios.forEach(element => {
       if (email === element) {
-        console.log('Si hay un email repetido');
+        console.log(`Antes de la comprobacion: ${bandCorreDuplicado}`);
+        // console.log('Si hay un email repetido');
         bandCorreDuplicado = true;
+        return console.log(
+          `enviando desde el metodo que verifica: ${bandCorreDuplicado}`,
+        );
       }
     });
 
@@ -249,7 +250,13 @@ $(document).ready(function () {
         title: 'ATENCIÓN...',
         text: 'Usted esta intentando registrar un usuario con un correo ya existente por favor intente el registro con un nuevo correo, Gracias.',
       });
-      return (bandCorreDuplicado = false);
+      console.log(
+        `esto es despues de mensaje correo repetido: ${bandCorreDuplicado}`,
+      );
+      bandCorreDuplicado = false;
+      return console.log(
+        `esto es despues de mensaje correo repetido de cambiar el valor: ${bandCorreDuplicado}`,
+      );
     }
 
     //esto se ejecuta para las ACTUALIZACIONES de informacion de USUARIOS
@@ -290,12 +297,15 @@ $(document).ready(function () {
         },
       });
 
-      return (bandCorreDuplicado = false);
+      console.log(`Esto es despues de actualizar: ${bandCorreDuplicado}`);
+      bandCorreDuplicado = false;
+      return console.log(
+        `Esto es despues de actualizar y hacer el cambio: ${bandCorreDuplicado}`,
+      );
     }
 
     // si NO existe email de usuario anteorior pasa a CREAR USUARIO
     if (bandCorreDuplicado === false && idFirebase === '') {
-      // idFirebase = coleccionUsuarios.push().key;
       createUser(email, password);
       function createUser(email, password) {
         firebase
@@ -305,7 +315,6 @@ $(document).ready(function () {
             // Signed in
             var user = userCredential.user;
 
-            /* probndo codigo */
             data = {
               numerodocumento: dni,
               nombres: nombres,
@@ -335,7 +344,7 @@ $(document).ready(function () {
             /* modal de aviso de que se actualizó usuario correctamente */
             Swal.fire({
               icon: 'success',
-              title: 'Datos de usuario actualizados correctamente',
+              title: 'Usuario creado correctamente',
               showClass: {
                 popup: 'animate__animated animate__fadeInDown',
               },
@@ -343,27 +352,23 @@ $(document).ready(function () {
                 popup: 'animate__animated animate__fadeOutUp',
               },
             });
-
-            return (bandCorreDuplicado = false);
           })
           .catch(error => {
             var errorCode = error.code;
             var errorMessage = error.message;
             alert(`Error ${errorCode} - ${errorMessage}`);
-            /* probando codigo */
-            $('#modalEmailRepetido').modal('show');
-
-            /* funcion para no perder la clase modal open de los modales */
-            $(document).on('hidden.bs.modal', function (event) {
-              if ($('.modal:visible').length) {
-                $('body').addClass('modal-open');
-              }
+            /* aqui va el modal de email repetido */
+            Swal.fire({
+              icon: 'error',
+              title: 'ATENCIÓN...',
+              text: 'Usted esta intentando registrar un usuario con un correo ya existente por favor intente el registro con un nuevo correo, Gracias.',
             });
-            return (bandCorreDuplicado = false);
-            /* fin probando codigo */
-            // return (bandCorreDuplicado = false);
           });
       }
+
+      console.log(
+        `Esto es despues de crear un nuevo usuario y hacer el cambio de valor desde el cuerpo de crear: ${bandCorreDuplicado}`,
+      );
     }
   });
 
