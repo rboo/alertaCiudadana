@@ -225,8 +225,12 @@ $(document).ready(function () {
 
     //validando que el DNI no tengo menos de 8 caracteres
     if (dni.length < 8) {
-      inputDni.value = '';
-      return (dni = '');
+      Swal.fire({
+        icon: 'error',
+        title: 'ATENCIÓN...',
+        text: 'Usted esta ingresando menos de 8 dígitos en campo DNI.',
+      });
+      return false;
     }
 
     //validando que el Email no exista en la base de datos
