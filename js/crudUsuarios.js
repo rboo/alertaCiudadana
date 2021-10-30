@@ -73,6 +73,8 @@ $(document).ready(function () {
       },
     ],
 
+    responsive: 'true',
+
     dom: 'Blfrtip',
     /* paginación de la tabla */
     pageLength: 5,
@@ -92,10 +94,13 @@ $(document).ready(function () {
         {
           //definimos estilos del boton de excel
           extend: 'excelHtml5',
-          text: 'Reporte Excel',
-          className: 'btn btn-outline-success',
+          // text: 'Reporte Excel',
+          // className: 'btn btn-outline-success',
+          text: '<i class="fas fa-file-excel icono-excel"></i>  Exportar a Excel',
+          title: 'Exportar a Excel',
+          className: 'btn btn-success',
 
-          //defino que columnas quiero que se vean
+          //defino que columnas quiero que se vean en el excel
           exportOptions: {
             columns: [1, 2, 3, 4, 6, 7, 8, 9, 10],
           },
@@ -117,6 +122,7 @@ $(document).ready(function () {
             printOptions: {
               horizontalCentered: true,
               verticalCentered: true,
+              orientation: 'landscape',
             },
             pageSetup: {
               orientation: 'landscape', // Orientacion
@@ -135,6 +141,20 @@ $(document).ready(function () {
             repeatHeading: true, // Repeat the heading row at the top of each page
             repeatCol: 'A:A', // Repeat column A (for pages wider than a single printed page)
           },
+        },
+        //propiedades del boton PDF
+        {
+          extend: 'pdfHtml5',
+          text: '<i class="fas fa-file-pdf"></i>',
+          titleAttr: 'Exportar a PDF',
+          className: 'btn btn-danger',
+        },
+        //propiedades del boton IMPRIMIR{
+        {
+          extend: 'print',
+          text: '<i class="fa fa-print"></i>',
+          titleAttr: 'Imprimir',
+          className: 'btn btn-info',
         },
       ],
     },
