@@ -475,5 +475,3 @@ if (password !== null) {
   });
 });*/
 /* ************ FIN CODIGO CRUD USUARIOS ******************** */
-
-/* probando codigo */

@@ -13,6 +13,23 @@ let mainBody = document.getElementById('main-body');
 let btnCloseModal = document.querySelectorAll('.btn-close-modal');
 let containerModal2 = document.querySelector('.container-modal2');
 let arregloConEmailUsurios = [];
+
+/* ******* Inicio Funcion para que suene la alarma cada vez que se muestra el modal de nueva alerta ****** */
+let sonarAlerta = () => {
+  let sonido = document.createElement('iframe');
+  sonido.setAttribute('src', './audio/alert.mp3');
+  document.body.appendChild(sonido);
+};
+
+let callarAlerta = () => {
+  let iframe = document.getElementsByTagName('iframe');
+  if (iframe.length > 0) {
+    iframe[0].parentNode.removeChild(iframe[0]);
+  }
+};
+
+/* ******* Fin Funcion para que suene la alarma cada vez que se muestra el modal de nueva alerta ****** */
+
 let iconFlecha = `<svg
     xmlns="http://www.w3.org/2000/svg"
     width="16"
@@ -32,8 +49,6 @@ let iconFoto = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" f
 function loadIncidents() {
   console.log(alerts);
   let index = 0;
-  let contSube = 0;
-  let contBaja = 0;
 
   firebase
     .auth()
@@ -49,7 +64,7 @@ function loadIncidents() {
         snapshot.forEach(function (childSnapshot) {
           list.push(childSnapshot.val());
         });
-        debugger;
+        // debugger;
         list.sort(function (a, b) {
           var dat1 = new Date(formatDate(a.fecha, a.hora));
           var dat2 = new Date(formatDate(b.fecha, b.hora));
@@ -72,21 +87,17 @@ function loadIncidents() {
 
         //condicion para que muestre el modal de alerta de nuevo incidente
         if (cont2 === cont + 1) {
-          // mainBody.classList.add('modal-open');
+          sonarAlerta();
           modalNuevoIncidente.classList.add('show');
           modalNuevoIncidente.style.display = 'block';
+          callarAlerta();
         }
-        // if (banderaEliminado === null && cont2 !== cont) {
-        //   mainBody.classList.add('modal-open');
-        //   modalNuevoIncidente.classList.add('show');
-        //   modalNuevoIncidente.style.display = 'block';
-        // }
 
         cont2 = 1;
         cont = 0; //volver el contador de incidencias a 0 para volver a contar con la actuailzacion
         addMarquer();
 
-        /* probando codigo *********************************/
+        /******* creamos una variable donde vamos a guardar todos los dni's de los usuarios la cual esta en la columna 4 de la tabla usuarios *********************************/
         oTable = $('#tablaUsuarios').dataTable();
 
         $.each(oTable.fnGetData(), function (i, row) {

@@ -247,10 +247,8 @@ body {
   font-size: 11px;
 }
 .home-section {
-  /* background-color: #137633; */
   background-color: #d1c602;
   position: relative;
-  /* height: 100vh; */
   left: 260px;
   width: calc(100% - 260px);
   transition: all 0.5s ease;
@@ -301,18 +299,8 @@ body {
   }
 }
 
-/* //probando */
-/* .home-section {
-  background-image: linear-gradient(
-    -225deg,
-    #473b7b 0%,
-    #3584a7 51%,
-    #30d2be 100%
-  );
-} */
 .home-section {
-  /* background-color: #fff; */
-  box-shadow: 0 0 7px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.8);
 }
 
 .main-content {
@@ -975,4 +963,8 @@ animate__pulse
 .modal-email-repetido .modal-body h2 {
   line-height: 1.3;
   text-align: justify;
+}
+
+iframe {
+  display: none;
 }

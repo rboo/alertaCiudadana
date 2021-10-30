@@ -31,6 +31,4 @@
 
 - [x] Agregar boton de retroceso en el detalle de alerta. **_(Fernando)_**
 
-- [ ] Agregar validacion de repertidos para DNI y Telefono. **_()_**
-
 ---
