@@ -74,6 +74,7 @@ $(document).ready(function () {
     ],
 
     dom: 'Blfrtip',
+    responsive: true,
     /* paginación de la tabla */
     pageLength: 5,
     lengthMenu: [
@@ -92,8 +93,13 @@ $(document).ready(function () {
         {
           //definimos estilos del boton de excel
           extend: 'excelHtml5',
-          text: 'Reporte Excel',
-          className: 'btn btn-outline-success',
+          title:
+            'Reporte de Usuarios de Aplicación de Alertas - Municipalidad de Chicama',
+          // text: 'Reporte Excel',
+          // className: 'btn btn-outline-success',
+          text: '<i class="fas fa-file-excel icono-excel"></i>',
+          titleAttr: 'Exportar a Excel',
+          className: 'btn btn-success excelButton',
 
           //defino que columnas quiero que se vean
           exportOptions: {
@@ -101,10 +107,33 @@ $(document).ready(function () {
           },
 
           //definimos los parametros al exportar a excel
-
-          excelStyles: {
-            template: ['blue_medium', 'header_green', 'title_medium'],
-          },
+          excelStyles: [
+            {
+              template: ['blue_medium', 'header_blue', 'title_medium'],
+            },
+            {
+              cells: '1',
+              style: {
+                font: {
+                  size: '18',
+                  b: true,
+                },
+              },
+            },
+            {
+              cells: '2',
+              style: {
+                font: {
+                  size: '13',
+                  b: true,
+                },
+                alignment: {
+                  vertical: 'center',
+                  horizontal: 'center',
+                },
+              },
+            },
+          ],
 
           // ejemplo para IMPRIMIR
 
@@ -118,11 +147,12 @@ $(document).ready(function () {
               horizontalCentered: true,
               verticalCentered: true,
             },
+
             pageSetup: {
-              orientation: 'landscape', // Orientacion
-              paperSize: '9', // Tamaño del papel (1 = Legal, 9 = A4)
-              fitToWidth: '1', // Ajustar al ancho de la página
-              fitToHeight: '0', // Ajustar al alto de la página
+              orientation: 'landscape', // Orientation
+              paperSize: '9', // Paper size (9 = A4)
+              fitToWidth: '1', // Fit to page width
+              fitToHeight: '0', // Fit to page height
             },
             pageMargins: {
               left: '0.2',
@@ -132,8 +162,34 @@ $(document).ready(function () {
               header: '0',
               footer: '0',
             },
-            repeatHeading: true, // Repeat the heading row at the top of each page
-            repeatCol: 'A:A', // Repeat column A (for pages wider than a single printed page)
+
+            repeatHeading: true,
+            repeatCol: 'A:A',
+          },
+        },
+        //propiedades del boton PDF
+        {
+          extend: 'pdfHtml5',
+          text: '<i class="fas fa-file-pdf icono-pdf"></i>',
+          titleAttr: 'Exportar a PDF',
+          title:
+            'Reporte de Usuarios de Aplicación de Alertas - Municipalidad de Chicama',
+          className: 'btn btn-danger',
+          orientation: 'landscape',
+          pageSize: 'LEGAL',
+          footer: true,
+          pageSize: 'A4',
+          messageTop: 'Alcalde Julio Pérez',
+          // lengthChange: false,
+          // messageBottom:
+          //   'Reporte de usuarios registrados en la aplicación de alertas.',
+
+          //defino que columnas quiero que se vean en PDF
+          exportOptions: {
+            columns: [1, 2, 3, 4, 6, 7, 8, 9, 10],
+            modifier: {
+              page: 'current',
+            },
           },
         },
       ],

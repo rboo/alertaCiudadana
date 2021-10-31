@@ -783,6 +783,16 @@ animate__pulse
   min-width: 80px;
 }
 
+.page-item.active .page-link {
+  background-color: #137633;
+  color: white;
+  font-size: 0.8rem;
+}
+
+.page-link {
+  color: black;
+}
+
 .bodyUsuarios td,
 .bodyIncidencias td {
   font-size: 0.8rem;
@@ -837,12 +847,6 @@ animate__pulse
   font-size: 0.9em;
 }
 
-#tablaUsuarios_wrapper .buttons-excel,
-#tablaIncidencias_wrapper .buttons-excel {
-  width: 15%;
-  font-size: 0.9em;
-}
-
 #tablaUsuarios_wrapper,
 #tablaIncidencias_wrapper {
   display: flex;
@@ -857,11 +861,15 @@ animate__pulse
 #tablaUsuarios_wrapper .dataTables_length,
 #tablaIncidencias_wrapper .dataTables_length {
   width: 50%;
+  font-size: 0.8em;
 }
 
 .tabla-usuarios .dt-buttons,
 .tabla-incidencias .dt-buttons {
-  width: 100%;
+  /* width: 100%; */
+  display: flex;
+  margin-right: 100%;
+  flex-wrap: nowrap !important;
 }
 
 /* #tablaUsuarios_paginate .pagination,
@@ -884,6 +892,17 @@ animate__pulse
 
 .tabla-incidencias {
   margin-top: 1%;
+}
+
+#tablaUsuarios_wrapper .buttons-excel,
+#tablaIncidencias_wrapper .buttons-excel,
+#tablaUsuarios_wrapper .buttons-pdf,
+#tablaIncidencias_wrapper .buttons-pdf {
+  font-size: 0.9em;
+  margin-right: 1rem;
+  padding: 0.3rem 2.5rem;
+  border-radius: 6px !important;
+  font-size: 20px;
 }
 
 /* ******** FIN ESTILOS CRUD USUARIOS ************ */
@@ -963,8 +982,4 @@ animate__pulse
 .modal-email-repetido .modal-body h2 {
   line-height: 1.3;
   text-align: justify;
-}
-
-iframe {
-  display: none;
 }
