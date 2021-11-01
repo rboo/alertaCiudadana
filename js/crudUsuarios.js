@@ -73,10 +73,7 @@ $(document).ready(function () {
       },
     ],
 
-    responsive: 'true',
-
     dom: 'Blfrtip',
-    responsive: true,
     /* paginación de la tabla */
     pageLength: 5,
     lengthMenu: [
@@ -225,7 +222,7 @@ $(document).ready(function () {
         },
       ],
     },
-    /* ***************************** FIN CONFIGURACION BOTON EXCEL *********************************** */
+    /* ***************************** FIN CONFIGURACION DE BOTONES *********************************** */
   });
 
   //Eventos de FIREBASE

@@ -80,7 +80,6 @@ $(document).ready(function () {
           '</button></div></div>',
       },
     ],
-
     dom: 'Blfrtip',
     /* paginación de la tabla */
     pageLength: 5,
@@ -100,8 +99,13 @@ $(document).ready(function () {
         {
           //definimos estilos del boton de excel
           extend: 'excelHtml5',
-          text: 'Reporte Excel',
-          className: 'btn btn-outline-success',
+          title: 'Reporte de Alertas - Municipalidad de Chicama',
+          // text: 'Reporte Excel',
+          // className: 'btn btn-outline-success',
+          text: '<i class="fas fa-file-excel icono-excel"></i>',
+          titleAttr: 'Exportar a Excel',
+          className: 'btn btn-success excelButton',
+          messageBottom: 'Alcalde Julio Pérez Cabrera.',
 
           //defino que columnas quiero que se vean
           exportOptions: {
@@ -109,10 +113,61 @@ $(document).ready(function () {
           },
 
           //definimos los parametros al exportar a excel
-
-          // excelStyles: {
-          //   template: ['blue_medium3', 'header_green', 'title_medium'],
-          // },
+          //definimos los parametros al exportar a excel
+          excelStyles: [
+            {
+              template: ['blue_medium', 'header_blue', 'title_medium'],
+            },
+            {
+              cells: '1',
+              style: {
+                font: {
+                  size: '14',
+                  b: true,
+                },
+              },
+            },
+            {
+              cells: '2',
+              style: {
+                font: {
+                  size: '12',
+                  b: true,
+                },
+                alignment: {
+                  vertical: 'center',
+                  horizontal: 'center',
+                },
+              },
+            },
+            {
+              cells: '3:',
+              style: {
+                font: {
+                  size: '11',
+                  b: false,
+                },
+                alignment: {
+                  vertical: 'center',
+                  horizontal: 'center',
+                },
+              },
+            },
+            {
+              cells: '-0',
+              style: {
+                font: {
+                  size: '10',
+                  b: true,
+                  lineHeight: 2,
+                },
+                alignment: {
+                  vertical: 'center',
+                  horizontal: 'right',
+                },
+              },
+            },
+          ],
 
           // ejemplo para IMPRIMIR
 
@@ -126,8 +181,8 @@ $(document).ready(function () {
               horizontalCentered: true,
               verticalCentered: true,
             },
+
             pageSetup: {
-              orientation: 'landscape', // Orientacion
               paperSize: '9', // Tamaño del papel (1 = Legal, 9 = A4)
               fitToWidth: '1', // Ajustar al ancho de la página
               fitToHeight: '0', // Ajustar al alto de la página
@@ -144,9 +199,42 @@ $(document).ready(function () {
             repeatCol: 'A:A', // Repeat column A (for pages wider than a single printed page)
           },
         },
+        //propiedades del boton PDF
+        {
+          extend: 'pdfHtml5',
+
+          //Esta funcion hace que el documento pdf vaya centrado, el valor del array puede cambiar de acuerdo a la posicion
+          customize: function (doc) {
+            doc.content[1].margin = [100, 0, 100, 0]; //left, top, right, bottom
+          },
+
+          text: '<i class="fas fa-file-pdf icono-pdf"></i>',
+          titleAttr: 'Exportar a PDF',
+          title:
+            'Reporte de Usuarios de Aplicación de Alertas - Municipalidad de Chicama',
+          className: 'btn btn-danger',
+          // orientation: 'landscape',
+          footer: true,
+          pageSize: 'A4',
+          messageBottom: {
+            text: 'Alcalde Julio Pérez Cabrera.',
+            alignment: {
+              vertical: 'center',
+              horizontal: 'right',
+            },
+          },
+
+          //defino que columnas quiero que se vean en PDF
+          exportOptions: {
+            columns: [1, 2, 3],
+            modifier: {
+              page: 'current',
+            },
+          },
+        },
       ],
     },
-    /* ***************************** FIN CONFIGURACION BOTON EXCEL *********************************** */
+    /* ***************************** FIN CONFIGURACION DE BOTONES *********************************** */
   });
 
   //Eventos de FIREBASE
