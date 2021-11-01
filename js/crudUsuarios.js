@@ -73,6 +73,8 @@ $(document).ready(function () {
       },
     ],
 
+    responsive: 'true',
+
     dom: 'Blfrtip',
     responsive: true,
     /* paginación de la tabla */
@@ -100,8 +102,9 @@ $(document).ready(function () {
           text: '<i class="fas fa-file-excel icono-excel"></i>',
           titleAttr: 'Exportar a Excel',
           className: 'btn btn-success excelButton',
+          messageBottom: 'Alcalde Julio Pérez Cabrera.',
 
-          //defino que columnas quiero que se vean
+          //defino que columnas quiero que se vean en el excel
           exportOptions: {
             columns: [1, 2, 3, 4, 6, 7, 8, 9, 10],
           },
@@ -133,6 +136,33 @@ $(document).ready(function () {
                 },
               },
             },
+            {
+              cells: '3:',
+              style: {
+                font: {
+                  size: '11',
+                  b: false,
+                },
+                alignment: {
+                  vertical: 'center',
+                  horizontal: 'center',
+                },
+              },
+            },
+            {
+              cells: '-0',
+              style: {
+                font: {
+                  size: '10',
+                  b: true,
+                  lineHeight: 2,
+                },
+                alignment: {
+                  vertical: 'center',
+                  horizontal: 'right',
+                },
+              },
+            },
           ],
 
           // ejemplo para IMPRIMIR
@@ -146,6 +176,7 @@ $(document).ready(function () {
             printOptions: {
               horizontalCentered: true,
               verticalCentered: true,
+              orientation: 'landscape',
             },
 
             pageSetup: {
@@ -179,7 +210,7 @@ $(document).ready(function () {
           pageSize: 'LEGAL',
           footer: true,
           pageSize: 'A4',
-          messageTop: 'Alcalde Julio Pérez',
+          messageTop: 'Alcalde Julio Pérez Cabrera.',
           // lengthChange: false,
           // messageBottom:
           //   'Reporte de usuarios registrados en la aplicación de alertas.',
