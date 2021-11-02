@@ -467,7 +467,6 @@ animate__pulse
 }
 
 .alerts-details {
-  /* width: 22%; */
   border-radius: 5px;
   border: 2px solid rgba(0, 0, 0, 0.2);
   margin: 0 1rem;
@@ -477,7 +476,8 @@ animate__pulse
   position: relative;
   margin-left: 100px;
   transition: all 1s ease;
-  /* opacity: 0; */
+  overflow-y: auto;
+  height: 86vh;
 }
 
 .alerts-details__list {
@@ -967,7 +967,6 @@ animate__pulse
   /* padding-bottom: ; */
 }
 
-/* probando codigo */
 .modal-email-repetido {
   width: 60vw;
   right: 29%;

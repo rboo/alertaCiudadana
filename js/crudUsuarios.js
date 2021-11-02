@@ -16,10 +16,13 @@ $(document).ready(function () {
   // Initialize Firebase
   firebase.initializeApp(config);*/
 
+  /* inicio probando codigo */
+
+  /* fin probando codigo */
+
   var filaEliminada; //para capturara la fila eliminada
   var filaEditada; //para capturara la fila editada o actualizada
-  let bandCorreDuplicado = false; //esta variable se utiliza en formulario de usuarios
-  // console.log(arregloConEmailUsurios);
+  let bandCorreDuplicado = false; //esta variable se utiliza en
 
   //creamos constantes para los iconos svg editar y borrar
   const iconoEditar =

@@ -13,23 +13,7 @@ let mainBody = document.getElementById('main-body');
 let btnCloseModal = document.querySelectorAll('.btn-close-modal');
 let containerModal2 = document.querySelector('.container-modal2');
 let arregloConEmailUsurios = [];
-
-/* ******* Inicio Funcion para que suene la alarma cada vez que se muestra el modal de nueva alerta ****** */
-let sonarAlerta = () => {
-  let sonido = document.createElement('iframe');
-  sonido.setAttribute('src', './audio/alert.mp3');
-  document.body.appendChild(sonido);
-};
-
-let callarAlerta = () => {
-  let iframe = document.getElementsByTagName('iframe');
-  if (iframe.length > 0) {
-    iframe[0].parentNode.removeChild(iframe[0]);
-  }
-};
-
-/* ******* Fin Funcion para que suene la alarma cada vez que se muestra el modal de nueva alerta ****** */
-
+//icono flecha
 let iconFlecha = `<svg
     xmlns="http://www.w3.org/2000/svg"
     width="16"
@@ -87,10 +71,10 @@ function loadIncidents() {
 
         //condicion para que muestre el modal de alerta de nuevo incidente
         if (cont2 === cont + 1) {
-          sonarAlerta();
           modalNuevoIncidente.classList.add('show');
           modalNuevoIncidente.style.display = 'block';
-          callarAlerta();
+          var myaudio = new Audio('./audio/alert.mp3');
+          myaudio.play();
         }
 
         cont2 = 1;
@@ -125,7 +109,6 @@ btnCloseModal.forEach(el => {
   el.addEventListener('click', () => {
     // mainBody.classList.remove('modal-open');
     modalNuevoIncidente.style.display = '';
-
     modalNuevoIncidente.classList.remove('show');
     imagenPrincipal.classList.add('d-none');
     tablaUsuarios.classList.add('d-none');
@@ -235,7 +218,7 @@ function generateMarker({ position, title }) {
 function showDetailIncident(dataIncidente, dataUsuario) {
   //let dataUser = getDataUser(data.usuario);
   //console.log("dataUser", JSON.stringify(dataUser));
-  console.log("nameFile",dataUsuario.imagen)
+  // console.log('nameFile', dataUsuario.imagen);
   document.getElementById('alerts-details-incident').innerHTML = '';
   document.getElementById('alerts-details-incident').innerHTML = `
   
@@ -321,7 +304,7 @@ function showDetailIncident(dataIncidente, dataUsuario) {
       >FOTO:</span
     >
     <a
-            href="./image/robo.jpg"
+            href="./image/imagen-no-disponible.jpg"
             class="alerts-details__valor alerts-details__photo-valor"
             data-lightbox="myGallery"
             data-title="Foto enviada por poblador."
@@ -331,7 +314,13 @@ function showDetailIncident(dataIncidente, dataUsuario) {
     <div class="iconFoto">${iconFoto}</div>
   </li>
 </ul>`;
-  getImage(dataIncidente.imagen)
+  if (
+    dataIncidente.titulo !== 'Asalto o Robo' &&
+    dataIncidente.titulo !== 'Sospechoso' &&
+    dataIncidente.titulo !== 'Nuevo Caso de Violencia'
+  ) {
+    getImage(dataIncidente.imagen);
+  }
 }
 
 function getDataUser(uid, data) {
@@ -350,7 +339,6 @@ function getDataUser(uid, data) {
     let btnVerLista = document.getElementById('btn-ver-lista');
 
     /************  INICIO BOTON VER LISTA DE ALERTAS **********************/
-    console.log(btnVerLista);
     if (btnVerLista != null) {
       btnVerLista.addEventListener('click', () => {
         // alerts.classList.toggle('left-none');
@@ -376,18 +364,21 @@ function getImage(nameFile) {
   // Create a reference with an initial file path and name
   var storage = firebase.storage();
   var storageRef = storage.ref(nameFile);
-  storageRef.getDownloadURL().then(function (url) {
-    var xhr = new XMLHttpRequest();
-    xhr.responseType = 'blob';
-    xhr.onload = function (event) {
-      var blob = xhr.response;
-    };
-    xhr.open('GET', url);
-    xhr.send();
-   
-    var img = document.getElementById('myGallery');
-    img.setAttribute("href", url);
-  }).catch(function (error) {
-    console.error("Error", error);
-  });
+  storageRef
+    .getDownloadURL()
+    .then(function (url) {
+      var xhr = new XMLHttpRequest();
+      xhr.responseType = 'blob';
+      xhr.onload = function (event) {
+        var blob = xhr.response;
+      };
+      xhr.open('GET', url);
+      xhr.send();
+
+      var img = document.getElementById('myGallery');
+      img.setAttribute('href', url);
+    })
+    .catch(function (error) {
+      console.error('Error', error);
+    });
 }
