@@ -23,14 +23,19 @@ function loadDataUser() {
   var starCountRef = dbref.ref().child('usuarios').child(dataUsuario.uid);
   starCountRef.on('value', snapshot => {
     var childData = snapshot.val();
-    console.log('data', childData);
-
-    $('#profile_name').html(childData.nombres);
-    console.log(childData.nombres);
-    if (childData.sexo === 'Masculino') {
-      $('#img_profile').attr('src', './image/avatar_man.png');
+    // confirmamos que exista el UID en nodo usuarios
+    if (childData !== null) {
+      console.log('data', childData);
+      $('#profile_name').html(childData.nombres);
+      console.log(childData.nombres);
+      if (childData.sexo === 'Masculino') {
+        $('#img_profile').attr('src', './image/avatar_man.png');
+      } else {
+        $('#img_profile').attr('src', './image/avatar_women.png');
+      }
     } else {
-      $('#img_profile').attr('src', './image/avatar_women.png');
+      // si no existe UID en nodo usuarios no se pinta la información
+      return false;
     }
   });
 }
