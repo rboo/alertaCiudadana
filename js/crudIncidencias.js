@@ -203,19 +203,21 @@ $(document).ready(function () {
         {
           extend: 'pdfHtml5',
 
-          //Esta funcion hace que el documento pdf vaya centrado, el valor del array puede cambiar de acuerdo a la posicion
+          //Esta funcion hace que el documento pdf vaya centrado, el valor del array puede cambiar de acuerdo a la posicion de la tabla
           customize: function (doc) {
-            doc.content[1].margin = [100, 0, 100, 0]; //left, top, right, bottom
+            doc.content[1].margin = [120, 0, 100, 0]; //left, top, right, bottom
+            doc.content[2].margin = [120, 30, 100, 0]; //left, top, right, bottom
           },
 
           text: '<i class="fas fa-file-pdf icono-pdf"></i>',
           titleAttr: 'Exportar a PDF',
           title:
-            'Reporte de Usuarios de Aplicación de Alertas - Municipalidad de Chicama',
+            'Reporte de Alertas de Aplicación de Alertas - Municipalidad de Chicama',
           className: 'btn btn-danger',
           // orientation: 'landscape',
           footer: true,
           pageSize: 'A4',
+          lengthChange: false,
           messageBottom: {
             text: 'Alcalde Julio Pérez Cabrera.',
             alignment: {
