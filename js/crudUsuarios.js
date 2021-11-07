@@ -409,6 +409,8 @@ $(document).ready(function () {
           .then(userCredential => {
             // Signed in
             var user = userCredential.user;
+            let uuid = user.uid;
+            console.log("uuid",uuid);
 
             data = {
               numerodocumento: dni,
@@ -423,18 +425,19 @@ $(document).ready(function () {
               sexo: sexo,
               tipoacceso: tipoAcceso,
               host: host,
+              token:uuid
             };
 
             // createUser(email, password);
-            idFirebase = coleccionUsuarios.push().key;
+            //idFirebase = coleccionUsuarios.push().key;
             actualizacionData = {};
-            actualizacionData[`/${idFirebase}`] = data;
+            actualizacionData[`/${uuid}`] = data;
             coleccionUsuarios.update(actualizacionData);
             id = '';
             $('form').trigger('reset'); //limpiamos los campos del formulario
             $('#modalAltaEdicion').modal('hide');
 
-            console.info(`Usuario creado correctamente ${user}`);
+            console.info(`Usuario creado correctamente`,user);
 
             /* modal de aviso de que se actualizó usuario correctamente */
             Swal.fire({
