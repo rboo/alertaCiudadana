@@ -4,6 +4,7 @@ const key = '123456';
 
 let contActual = 0;
 let cont = 0;
+let myaudio;
 
 let primercont = [];
 let modalNuevoIncidente = document.getElementById('staticBackdrop');
@@ -73,7 +74,8 @@ function loadIncidents() {
         if (cont2 === cont + 1) {
           modalNuevoIncidente.classList.add('show');
           modalNuevoIncidente.style.display = 'block';
-          var myaudio = new Audio('./audio/alert.mp3');
+          myaudio = new Audio('./audio/alert.mp3');
+          myaudio.setAttribute('loop', 'loop');
           myaudio.play();
         }
 
@@ -110,6 +112,7 @@ btnCloseModal.forEach(el => {
     // mainBody.classList.remove('modal-open');
     modalNuevoIncidente.style.display = '';
     modalNuevoIncidente.classList.remove('show');
+    myaudio.removeAttribute('loop');
     imagenPrincipal.classList.add('d-none');
     tablaUsuarios.classList.add('d-none');
     sidebar.classList.add('close');
