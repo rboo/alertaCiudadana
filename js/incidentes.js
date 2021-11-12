@@ -75,6 +75,7 @@ function loadIncidents() {
           modalNuevoIncidente.classList.add('show');
           modalNuevoIncidente.style.display = 'block';
           myaudio = new Audio('./audio/alert.mp3');
+          myaudio.volume = 1;
           myaudio.setAttribute('loop', 'loop');
           myaudio.play();
         }
