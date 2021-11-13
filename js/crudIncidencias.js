@@ -273,19 +273,10 @@ $(document).ready(function () {
         cont2 += 10;
         let imagen = fila[4]; //capturamos el atributo IMAGEN de la fila de la tabla
 
-        if (imagen == 'imagen') {
-          let id = fila[0]; //capturamos el atributo ID de la fila
-          db.ref(`incidentes/${id}`).remove(); //eliminamos el producto de firebase
-
-          Swal.fire('¡Eliminado!', 'La alerta ha sido eliminada.', 'success');
-        } else {
+        if (imagen !== 'imagen') {
           // Creando referencia a la imagen de storage que se va a eliminar
           var storage = firebase.storage();
           var desertRef = storage.ref(imagen);
-
-          let id = fila[0]; //capturamos el atributo ID de la fila
-          db.ref(`incidentes/${id}`).remove(); //eliminamos el incidente de firebase
-
           // Eliminando la imagen de storage
           desertRef
             .delete()
@@ -293,9 +284,11 @@ $(document).ready(function () {
             .catch(function (error) {
               console.log(error);
             });
-
-          Swal.fire('¡Eliminado!', 'La alerta ha sido eliminada.', 'success');
         }
+        let id = fila[0]; //capturamos el atributo ID de la fila
+        db.ref(`incidentes/${id}`).remove(); //eliminamos el incidente de firebase
+
+        Swal.fire('¡Eliminado!', 'La alerta ha sido eliminada.', 'success');
       }
     });
   });
