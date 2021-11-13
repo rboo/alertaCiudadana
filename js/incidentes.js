@@ -166,10 +166,6 @@ function loadIncidentDetail(uid) {
       var starCountRef = dbref.ref().child('incidentes').child(uid);
       starCountRef.on('value', snapshot => {
         let dataIncidente = snapshot.val();
-        console.log(
-          'data',
-          dataIncidente.latitud + '-' + dataIncidente.longitud,
-        );
 
         //showDetailIncident(dataIncidente);
         getDataUser(dataIncidente.usuario, dataIncidente);
@@ -320,7 +316,7 @@ function showDetailIncident(dataIncidente, dataUsuario) {
 </ul>`;
   if (
     dataIncidente.titulo !== 'Asalto o Robo' &&
-    dataIncidente.titulo !== 'Sospechoso' &&
+    dataIncidente.titulo !== 'Accidente de Tránsito' &&
     dataIncidente.titulo !== 'Nuevo Caso de Violencia'
   ) {
     getImage(dataIncidente.imagen);

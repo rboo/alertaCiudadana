@@ -1,10 +1,5 @@
 // let alertsDetails = document.querySelector('.alerts-details');
 $(document).ready(function () {
-  /* ********** PROBANDO CODIGO */
-  // Update slide switch highlight
-
-  /* ********** FIN PROBANDO CODIGO */
-
   // Your web app's Firebase configuration
   /*const config = {
     // Your web app's Firebase configuration
@@ -23,15 +18,10 @@ $(document).ready(function () {
   firebase.initializeApp(config);*/
 
   let filaEliminada; //para capturara la fila eliminada
-  let filaEditada; //para capturara la fila editada o actualizada
-  let filaSeleccionada; //para capturara la fila para ver detalle
 
   //creamos constantes para los iconos detalle, editar y borrar
   const iconoDetalle =
     '<svg xmlns="http://www.w3.org/2000/svg" width="1.1em" height="1.1em" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M15 11h7v2h-7zm1 4h6v2h-6zm-2-8h8v2h-8zM4 19h10v-1c0-2.757-2.243-5-5-5H7c-2.757 0-5 2.243-5 5v1h2zm4-7c1.995 0 3.5-1.505 3.5-3.5S9.995 5 8 5 4.5 6.505 4.5 8.5 6.005 12 8 12z"></path></svg>';
-
-  const iconoEditar =
-    '<svg class="bi bi-pencil-square" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/></svg>';
   const iconoBorrar =
     '<svg class="bi bi-trash" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/><path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/></svg>';
 
@@ -67,7 +57,7 @@ $(document).ready(function () {
     data: dataSet,
     columnDefs: [
       {
-        targets: [0],
+        targets: [0, 4],
         visible: false, //ocultamos la columna de ID que es la [0]
       },
       {
@@ -241,40 +231,17 @@ $(document).ready(function () {
 
   //Eventos de FIREBASE
 
-  //Luego de un ALTA motramos lo datos en datatables
+  //Luego de un nuevo incidente motramos lo datos en datatables
   //CHILD_ADDED - evento para agregar hijo a la base
   coleccionIncidencias.on('child_added', datos => {
-    // console.log(datos); //mostramos todos los datos de la coleccion desde firebase
-    // console.log(datos.key); //mostramos las claves (los IDs autogenerados desde firebase)
     dataSet = [
       datos.key,
       datos.child('titulo').val(),
       datos.child('fecha').val(),
       datos.child('hora').val(),
-      // datos.child('correo').val(),
-      // datos.child('clave').val(),
-      // datos.child('direccion').val(),
-      // datos.child('telefono').val(),
-      // datos.child('fechanac').val(),
+      datos.child('imagen').val(),
     ];
     table.rows.add([dataSet]).draw();
-  });
-
-  //CHILD_CHANGED - evento para modificar o actualizar hijo a la base-NO SE IMPLEMENTA EN ESTA TABLA
-  //luego de EDITAR mostramos los datos
-  coleccionIncidencias.on('child_changed', datos => {
-    dataSet = [
-      datos.key,
-      datos.child('titulo').val(),
-      datos.child('fecha').val(),
-      datos.child('hora').val(),
-      // datos.child('correo').val(),
-      // datos.child('clave').val(),
-      // datos.child('direccion').val(),
-      // datos.child('telefono').val(),
-      // datos.child('fechanac').val(),
-    ];
-    table.row(filaEditada).data(dataSet).draw();
   });
 
   //CHILD_REMOVED - evento para eliminar hijo a la base
@@ -284,96 +251,7 @@ $(document).ready(function () {
     table.row(filaEliminada.parents('tr')).remove().draw();
   });
 
-  //--- Formulario de ALTA Y EDICION ---//
-  $('form').submit(function (e) {
-    e.preventDefault(); //Evitamos el envio del submit
-    let id = $.trim($('#id').val());
-    let titulo = $.trim($('#titulo').val());
-    let fecha = $.trim($('#fecha').val());
-    let hora = $.trim($('#hora').val());
-    // let email = $.trim($('#email').val());
-    // let password = $.trim($('#password').val());
-    // let telefono = $.trim($('#telefono').val());
-    // let direccion = $.trim($('#direccion').val());
-    // let fecnac = $.trim($('#fecnac').val());
-    // let imagen = '';
-    // let sexo = $.trim($('#sexo').val());
-    // let tipoAcceso = '';
-    // let host = '1'; //1 -> web
-
-    let idFirebase = id;
-    if (idFirebase == '') {
-      idFirebase = coleccionIncidencias.push().key;
-    }
-
-    data = {
-      titulo: titulo,
-      fecha: fecha,
-      hora: hora,
-      // correo: email,
-      // clave: password,
-      // telefono: telefono,
-      // direccion: direccion,
-      // fechanac: fecnac,
-      // imagen: imagen,
-      // sexo: sexo,
-      // tipoacceso: tipoAcceso,
-      // host: host,
-    };
-
-    actualizacionData = {};
-    actualizacionData[`/${idFirebase}`] = data;
-    createUser(email, password);
-    coleccionIncidencias.update(actualizacionData);
-    id = '';
-    $('form').trigger('reset'); //limpiamos los campos del formulario
-    $('#modalAltaEdicion').modal('hide');
-  });
-
   //Botones
-
-  // En este caso NO SE AGREGARÁ NUEVAS INCIDENCIAS DESDE DASHBOARD
-  $('#btnNuevo').click(function () {
-    // $('#id').val('');
-    // $('#titulo').val('');
-    // $('#nombres').val('');
-    // $('#apellidos').val('');
-    // $('#email').val('');
-    // $('#password').val('');
-    // $('#telefono').val('');
-    // $('#direccion').val('');
-    // $('#fecnac').val('');
-    // $('form').trigger('reset');
-    // $('#modalAltaEdicion').modal('show');
-  });
-
-  // En este caso NO SE EDITARÁ EN ESTE DASHBOARD
-  $('#tablaIncidencias').on('click', '.btnEditar', function () {
-    // filaEditada = table.row($(this).parents('tr'));
-    // let fila = $('#tablaIncidencias')
-    //   .dataTable()
-    //   .fnGetData($(this).closest('tr'));
-    // let id = fila[0];
-    // console.log(id);
-    // let titulo = $(this).closest('tr').find('td:eq(0)').text();
-    // let apellidos = $(this).closest('tr').find('td:eq(1)').text();
-    // let nombres = $(this).closest('tr').find('td:eq(2)').text();
-    // let email = $(this).closest('tr').find('td:eq(3)').text();
-    // let password = $(this).closest('tr').find('td:eq(4)').text();
-    // let direccion = $(this).closest('tr').find('td:eq(5)').text();
-    // let telefono = $(this).closest('tr').find('td:eq(6)').text();
-    // let fecnac = $(this).closest('tr').find('td:eq(7)').text();
-    // $('#id').val(id);
-    // $('#titulo').val(titulo);
-    // $('#nombres').val(nombres);
-    // $('#apellidos').val(apellidos);
-    // $('#email').val(email);
-    // $('#password').val(password);
-    // $('#telefono').val(telefono);
-    // $('#direccion').val(direccion);
-    // $('#fecnac').val(fecnac);
-    // $('#modalAltaEdicion').modal('show');
-  });
 
   /* boton BORRAR */
   $('#tablaIncidencias').on('click', '.btnBorrar', function () {
@@ -393,8 +271,30 @@ $(document).ready(function () {
           .fnGetData($(this).closest('tr'));
         banderaEliminado = true;
         cont2 += 10;
+        let tipoIncidente = fila[1];
+        console.log(`Este es mi tipo de incidente: ${tipoIncidente}`);
+        if (
+          tipoIncidente != 'Nuevo Caso de Violencia' ||
+          tipoIncidente != 'Asalto o Robo' ||
+          tipoIncidente != 'Accidente de Tránsito'
+        ) {
+          let imagen = fila[4]; //capturamos el atributo IMAGEN de la fila de la tabla
+          // Creando referencia a la imagen de storage que se va a eliminar
+          var storage = firebase.storage();
+          var desertRef = storage.ref(imagen);
+
+          // Eliminando la imagen de storage
+          desertRef
+            .delete()
+            .then(function () {})
+            .catch(function (error) {
+              console.log(error);
+            });
+        }
+
         let id = fila[0]; //capturamos el atributo ID de la fila
         db.ref(`incidentes/${id}`).remove(); //eliminamos el producto de firebase
+
         Swal.fire('¡Eliminado!', 'La alerta ha sido eliminada.', 'success');
       }
     });

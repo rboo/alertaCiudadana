@@ -430,7 +430,7 @@ body {
   background-color: #a9dc76;
 }
 
-.leyenda-alertas__sospechoso::before {
+.leyenda-alertas__transito::before {
   background-color: #78dce8;
 }
 
@@ -513,7 +513,7 @@ animate__pulse
   background-color: #a9dc76;
 }
 
-.alert-type-Sospechoso {
+.alert-type-Accidente {
   background-color: #78dce8;
 }
 
